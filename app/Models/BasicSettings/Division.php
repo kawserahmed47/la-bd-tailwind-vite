@@ -10,6 +10,7 @@ class Division extends Model
 {
     use HasFactory;
 
+    protected $table = 'divisions';
     protected $fillable = [ 
         'name', 
         'bn_name',

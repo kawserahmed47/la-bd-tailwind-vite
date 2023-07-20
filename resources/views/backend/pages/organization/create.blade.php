@@ -29,80 +29,63 @@
                         </a>
                     </div>
                     {{-- <hr> --}}
-                    <form action="#">
-                        <div class="p-6.5">
-                            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                <div class="w-full xl:w-1/2">
-                                    <label class="mb-2.5 block text-black dark:text-white">
-                                        First name
-                                    </label>
-                                    <input type="text" placeholder="Enter your first name"
-                                        class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        <form id="organization-store-form" method="POST" enctype="multipart/form-data" action="{{route('admin.organization.store')}}">
+                            @csrf
+                            <div class="relative">
+                                <div class="p-6.5">
+                                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                                        <div class="w-full xl:w-1/2">
+                                            <label for="name" class="mb-2.5 block text-black dark:text-white">
+                                                Name in English
+                                            </label>
+                                            <input type="text" id="name" name="name" placeholder="Name in English"
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                                <small class="error error-name text-danger text-sm font-medium"></small>
+        
+                                        </div>
+        
+                                        <div class="w-full xl:w-1/2">
+                                            <label for="bn_name" class="mb-2.5 block text-black dark:text-white">
+                                                Name in Bengali
+                                            </label>
+                                            <input type="text" id="bn_name" name="bn_name" placeholder="Name in Bengali"
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                                <small class="error error-bn_name text-danger text-sm font-medium"></small>
+        
+                                        </div>
+                                    </div>
+        
+                                    <div class="mb-6">
+                                        <label for="description" class="mb-2.5 block text-black dark:text-white">
+                                            Description
+                                        </label>
+                                        <textarea rows="6" id="description" placeholder="Type organization description"
+                                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
+                                            <small class="error error-description text-danger text-sm font-medium"></small>
+                                    </div>
+        
+                                    <div class="mb-6">
+                                        <label class=" block text-gray-500 font-bold">
+                                        <input class="mr-2 leading-tight" value="1" name="status" type="checkbox" checked>
+                                        <span class="text-sm">
+                                            Active Organization
+                                        </span>
+                                        </label>
+                                    </div>
+        
+                                    <button class="flex w-full items-center gap-3 justify-center rounded bg-primary p-3 font-medium text-gray">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3m-5.5 0V1.07M5.5 5l4-4 4 4"/>
+                                        </svg>  
+                                        Save Organization
+                                    </button>
                                 </div>
-
-                                <div class="w-full xl:w-1/2">
-                                    <label class="mb-2.5 block text-black dark:text-white">
-                                        Last name
-                                    </label>
-                                    <input type="text" placeholder="Enter your last name"
-                                        class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                                </div>
-                            </div>
-
-                            <div class="mb-4.5">
-                                <label class="mb-2.5 block text-black dark:text-white">
-                                    Email <span class="text-meta-1">*</span>
-                                </label>
-                                <input type="email" placeholder="Enter your email address"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                            </div>
-
-                            <div class="mb-4.5">
-                                <label class="mb-2.5 block text-black dark:text-white">
-                                    Subject
-                                </label>
-                                <input type="text" placeholder="Select subject"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                            </div>
-
-                            <div class="mb-4.5">
-                                <label class="mb-2.5 block text-black dark:text-white">
-                                    Subject
-                                </label>
-                                <div class="relative z-20 bg-transparent dark:bg-form-input">
-                                    <select
-                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                        <option value="">Type your subject</option>
-                                        <option value="">USA</option>
-                                        <option value="">UK</option>
-                                        <option value="">Canada</option>
-                                    </select>
-                                    <span class="absolute top-1/2 right-4 z-30 -translate-y-1/2">
-                                        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g opacity="0.8">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                                                    fill=""></path>
-                                            </g>
-                                        </svg>
-                                    </span>
+                                <div class="absolute form-loaded left-0 right-0 bottom-0 top-0  z-999 hidden items-center justify-center  bg-white opacity-50">
+                                    <div class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
                                 </div>
                             </div>
-
-                            <div class="mb-6">
-                                <label class="mb-2.5 block text-black dark:text-white">
-                                    Message
-                                </label>
-                                <textarea rows="6" placeholder="Type your message"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
-                            </div>
-
-                            <button class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                       
                 </div>
             </div>
         </div>
@@ -110,4 +93,36 @@
 @endsection
 
 @push('js')
+<script type="module">
+    $(document).on('submit', '#organization-store-form', function(e){
+        e.preventDefault();
+        let _this = $(this);
+
+        $.ajax({
+            type: "post",
+            url: "{{route('admin.organization.store')}}",
+            data: _this.serialize(),
+            beforeSend: function() {
+                _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
+                _this.find('.error').html('');
+            },
+            success: function (response) {
+                _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                Toast.fire({icon: 'success', text: response.message});
+                location.href = "{{route('admin.organization.index')}}";
+            },
+            error: function (xhr) {
+                _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                var responseText = $.parseJSON(xhr.responseText);
+                Toast.fire({icon: 'error', text: responseText.message});
+                if (responseText.errors.length) {
+                    $.each(responseText.errors, function (indexInArray, valueOfElement) { 
+                         $('.error-'+indexInArray).html(valueOfElement[0]);
+                    });
+                }
+            }
+        });
+
+    })
+</script>
 @endpush
