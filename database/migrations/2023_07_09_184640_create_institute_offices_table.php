@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('institute_offices', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('bn_name')->unique();
-            $table->string('slug')->unique();
-            $table->string('lat')->nullable();
-            $table->string('lon')->nullable();
-            $table->string('url')->nullable();
+            $table->string('name');
+            $table->string('bn_name');
+            $table->string('slug');
             $table->text('address')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
-            $table->foreignId('institute_id')->constrained('thanas')->onDelete('cascade');
+            $table->foreignId('institute_id')->constrained('institutes')->onDelete('cascade');
             $table->timestamps();
         });
     }

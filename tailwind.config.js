@@ -295,5 +295,10 @@ export default {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      padding: ['last'],
+    }
+  },
 }
 

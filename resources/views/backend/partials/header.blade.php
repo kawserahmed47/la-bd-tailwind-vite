@@ -29,7 +29,7 @@
                 </span>
             </button>
             <!-- Hamburger Toggle BTN -->
-            <a class="block flex-shrink-0 lg:hidden" href="index.html">
+            <a class="block flex-shrink-0 lg:hidden" href="{{route('admin.dashboard')}}">
                 <img src="{{ asset('images') }}/logo/logo-icon.png" height="30" width="30" alt="Logo" />
             </a>
         </div>
@@ -315,7 +315,7 @@
                         </li>
                       
                         <li>
-                            <a href="settings.html"
+                            <a href="#"
                                 class="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
                                 <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">

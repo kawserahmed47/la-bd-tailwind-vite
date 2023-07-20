@@ -1,4 +1,4 @@
-@extends('backend.master', ['title' => 'Dashboard'])
+@extends('backend.master', ['title' => 'Dashboard', 'page' => 'dashboard'])
 
 @push('css')
     

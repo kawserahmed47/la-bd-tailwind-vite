@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('organization_officers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('organization_office_id')->constrained('organization_offices')->onDelete('cascade');
+            $table->foreignId('organization_designation_id')->constrained('organization_designations')->onDelete('cascade');
+            $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->timestamps();
         });
     }
