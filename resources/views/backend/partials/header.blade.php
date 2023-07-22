@@ -35,8 +35,7 @@
         </div>
 
         <div class="hidden sm:block">
-            <h2 class="text-bold text-2xl font-weight-bolder">ভূমি অধিগ্রহণ শাখা , জেলা প্রশাসকের কার্যালয় , শেরপুর
-            </h2>
+            <h2 class="text-bold text-2xl font-weight-bolder">ভূমি অধিগ্রহণ শাখা, জেলা প্রশাসকের কার্যালয়, ঢাকা</h2>
         </div>
 
         <div class="flex items-center gap-3 2xsm:gap-7">

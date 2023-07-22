@@ -159,11 +159,20 @@ class OrganizationController extends Controller
             abort(404);
         }
 
-        $mpdf = new Mpdf();
+        $config = [
+            'mode' => 'utf-8', // Set the character encoding
+            'format' => 'A4',  // Set the paper size (A4 is the default)
+            'orientation' => 'P', // 'P' for portrait, 'L' for landscape
+            'default_font_size' => 12, // Set the default font size
+            'default_font' => 'bangla', // Set the default font to your Bengali font
+        ];
+        $mpdf = new Mpdf($config);
 
-        
-        $mpdf->WriteHTML('<h1>বাংলা ফন্ট দিয়ে পিডিএফ তৈরি করা</h1>');
-        $mpdf->Output('filename.pdf', 'I');
+
+        $html =  view('backend.pages.organization.download', $data)->render();
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('organization.pdf', 'I');
 
         // return view('backend.pages.organization.download', $data);
  

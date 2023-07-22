@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frontend.pages.index');
+    // return view('frontend.pages.index');
+   return redirect()->route('auth.login');
 })->name('home');
