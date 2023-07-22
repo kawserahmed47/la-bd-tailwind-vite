@@ -1,5 +1,8 @@
 <?php
 
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
+use Mpdf\Mpdf;
 use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OrganizationDesignationController;
@@ -33,3 +36,5 @@ Route::resources([
     'organization-officer' => OrganizationOfficerController::class,
     'ministry' => MinistryController::class,
 ]);
+
+Route::get('organization-download/{id}',[OrganizationController::class, 'download'])->name('organization.download');

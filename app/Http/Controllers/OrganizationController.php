@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BasicSettings\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+// Import the mpdf class at the beginning of your file
+use Mpdf\Mpdf;
 
 class OrganizationController extends Controller
 {
@@ -23,7 +25,6 @@ class OrganizationController extends Controller
     public function create()
     {
         return view('backend.pages.organization.create');
-
     }
 
     /**
@@ -32,8 +33,8 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'bn_name' => 'required',
+            'name' => 'required | unique:organizations,name',
+            'bn_name' => 'required | unique:organizations,bn_name',
             'description' => 'nullable',
             'status' => 'nullable|boolean'
         ]);
@@ -56,14 +57,12 @@ class OrganizationController extends Controller
             $data['status'] = true;
             $data['message'] = "Organization created successfully!";
             return response()->json($data, 200);
-
         } catch (\Throwable $th) {
             $data['status'] = false;
             $data['message'] = "Failed to create organization!";
             $data['errors'] = $th;
             return response()->json($data, 500);
         }
-
     }
 
     /**
@@ -71,16 +70,23 @@ class OrganizationController extends Controller
      */
     public function show($id)
     {
-        return view('backend.pages.organization.show');
-
+        $data['organization'] = Organization::find($id);
+        if (!$data['organization']) {
+            abort(404);
+        }
+        return view('backend.pages.organization.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $id)
+    public function edit($id)
     {
-        return view('backend.pages.organization.edit');
+        $data['organization'] = Organization::find($id);
+        if (!$data['organization']) {
+            abort(404);
+        }
+        return view('backend.pages.organization.edit', $data);
     }
 
     /**
@@ -88,14 +94,79 @@ class OrganizationController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required | unique:organizations,name,' . $id,
+            'bn_name' => 'required | unique:organizations,bn_name,' . $id,
+            'description' => 'nullable',
+            'status' => 'nullable|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            $data['status'] = false;
+            $data['message'] = "Please enter all required fields!";
+            $data['errors'] = $validator->errors();
+            return response()->json($data, 400);
+        }
+
+        $organization =  Organization::find($id);
+
+        if ($organization) {
+            try {
+                $organization->name = $request->name;
+                $organization->bn_name = $request->bn_name;
+                $organization->description = $request->description;
+                $organization->status = $request->status ?? false;
+                $organization->save();
+
+                $data['status'] = true;
+                $data['message'] = "Organization updated successfully!";
+                return response()->json($data, 200);
+            } catch (\Throwable $th) {
+                $data['status'] = false;
+                $data['message'] = "Failed to update organization!";
+                $data['errors'] = $th;
+                return response()->json($data, 500);
+            }
+        } else {
+            $data['status'] = false;
+            $data['message'] = "Nothing to update organization!";
+            return response()->json($data, 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-        //
+        try {
+            Organization::destroy($id);
+            $data['status'] = true;
+            $data['message'] = "Organization removed successfully!";
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            $data['status'] = false;
+            $data['message'] = "Failed to remove organization!";
+            $data['errors'] = $th;
+            return response()->json($data, 200);
+        }
+    }
+
+    public function download($id)
+    {
+        $data['organization'] = Organization::find($id);
+        if (!$data['organization']) {
+            abort(404);
+        }
+
+        $mpdf = new Mpdf();
+
+        
+        $mpdf->WriteHTML('<h1>বাংলা ফন্ট দিয়ে পিডিএফ তৈরি করা</h1>');
+        $mpdf->Output('filename.pdf', 'I');
+
+        // return view('backend.pages.organization.download', $data);
+ 
+    
     }
 }

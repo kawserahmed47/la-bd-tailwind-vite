@@ -19,16 +19,14 @@
                 <!-- Contact Form -->
                 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark px-3 pb-2.5 sm:px-5.5 xl:pb-1">
                     <div class="flex flex-col border-b border-[#eee] sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
-                        <h2 class="font-semibold text-title-md2 text-black dark:text-white">New organization form</h2>
-                        {{-- <a class="text-primary" href="{{route('admin.organization.create')}}">Create New</a> --}}
+                        <h2 class="text-bold text-lg font-weight-bolder">New organization form</h2>
                         <a href="{{route('admin.organization.index')}}" class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01"/>
                               </svg>
                           Show List
                         </a>
                     </div>
-                    {{-- <hr> --}}
                         <form id="organization-store-form" method="POST" enctype="multipart/form-data" action="{{route('admin.organization.store')}}">
                             @csrf
                             <div class="relative">
@@ -59,30 +57,28 @@
                                         <label for="description" class="mb-2.5 block text-black dark:text-white">
                                             Description
                                         </label>
-                                        <textarea rows="6" id="description" placeholder="Type organization description"
+                                        <textarea rows="6" id="description" name="description" placeholder="Type organization description"
                                             class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
                                             <small class="error error-description text-danger text-sm font-medium"></small>
                                     </div>
         
                                     <div class="mb-6">
-                                        <label class=" block text-gray-500 font-bold">
-                                        <input class="mr-2 leading-tight" value="1" name="status" type="checkbox" checked>
+                                        <label for="status" class="mb-2.5 text-black dark:text-white">
+                                        <input class="mr-2 leading-tight" id="status" value="1" name="status" type="checkbox" checked>
                                         <span class="text-sm">
                                             Active Organization
                                         </span>
                                         </label>
                                     </div>
         
-                                    <button class="flex w-full items-center gap-3 justify-center rounded bg-primary p-3 font-medium text-gray">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                    <button class="flex w-full items-center gap-3 justify-center rounded bg-primary p-3 font-medium text-white">
+                                        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3m-5.5 0V1.07M5.5 5l4-4 4 4"/>
                                         </svg>  
                                         Save Organization
                                     </button>
                                 </div>
-                                <div class="absolute form-loaded left-0 right-0 bottom-0 top-0  z-999 hidden items-center justify-center  bg-white opacity-50">
-                                    <div class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
-                                </div>
+                                @include('common.action_loader')
                             </div>
                         </form>
                        
@@ -97,7 +93,6 @@
     $(document).on('submit', '#organization-store-form', function(e){
         e.preventDefault();
         let _this = $(this);
-
         $.ajax({
             type: "post",
             url: "{{route('admin.organization.store')}}",
@@ -115,14 +110,11 @@
                 _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
                 var responseText = $.parseJSON(xhr.responseText);
                 Toast.fire({icon: 'error', text: responseText.message});
-                if (responseText.errors.length) {
-                    $.each(responseText.errors, function (indexInArray, valueOfElement) { 
-                         $('.error-'+indexInArray).html(valueOfElement[0]);
-                    });
-                }
+                $.each(responseText.errors, function (indexInArray, valueOfElement) { 
+                        $('.error-'+indexInArray).html(valueOfElement[0]);
+                });
             }
         });
-
     })
 </script>
 @endpush
