@@ -167,7 +167,7 @@ class OrganizationController extends Controller
             'default_font' => 'bangla', // Set the default font to your Bengali font
         ];
         $mpdf = new Mpdf($config);
-
+        $mpdf->showImageErrors = true;
 
         $html =  view('backend.pages.organization.download', $data)->render();
 

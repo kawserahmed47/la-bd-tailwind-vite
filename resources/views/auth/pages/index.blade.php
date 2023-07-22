@@ -12,7 +12,7 @@
                 <div class="flex flex-wrap items-center">
                     <div class="hidden w-full xl:block xl:w-1/2">
                         <div class="py-17.5 px-26 text-center">
-                            <a class="mb-5.5 inline-block" href="index.html">
+                            <a class="mb-5.5 inline-block" href="{{route('home')}}">
                                 <img height="90" width="90"
                                     src="https://la.kinabeca.com/clientAdmin/image/governmentOfBangladesh1.svg"
                                     alt="Logo" />
