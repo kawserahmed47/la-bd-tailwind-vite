@@ -152,9 +152,9 @@ class OrganizationController extends Controller
         }
     }
 
-    public function download($id)
+    public function download($slug)
     {
-        $data['organization'] = Organization::find($id);
+        $data['organization'] = Organization::where('slug',$slug)->first();
         if (!$data['organization']) {
             abort(404);
         }

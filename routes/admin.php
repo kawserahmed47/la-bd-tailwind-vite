@@ -37,4 +37,4 @@ Route::resources([
     'ministry' => MinistryController::class,
 ]);
 
-Route::get('organization-download/{id}',[OrganizationController::class, 'download'])->name('organization.download');
+Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
