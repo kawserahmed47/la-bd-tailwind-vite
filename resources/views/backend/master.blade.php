@@ -37,7 +37,7 @@
       <!-- ===== Header End ===== -->
 
       <!-- ===== Main Content Start ===== -->
-      <main>
+      <main >
           @yield('content')
       </main>
       <!-- ===== Main Content End ===== -->

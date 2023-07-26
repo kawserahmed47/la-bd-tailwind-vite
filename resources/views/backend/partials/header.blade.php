@@ -365,6 +365,8 @@
             },
             beforeSend: function() {
                 _this.prop("disabled", true);
+                $("#page-loader").attr("x-show", "true");
+                Alpine.data("loaded", value => value = true);            
             },
             success: function (response) {
                 Toast.fire({icon:'success', text:response.message})
@@ -372,6 +374,8 @@
             },
             error: function (xhr, status, error){
                 _this.prop("disabled", false);
+                $("#page-loader").attr("x-show", "false");
+                Alpine.data("loaded", value => value = false);  
                 let responseText = $.parseJSON(xhr.responseText);
                 Toast.fire({icon:'error', text:responseText.message})
             }

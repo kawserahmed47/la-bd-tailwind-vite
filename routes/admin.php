@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MenuController;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
@@ -35,6 +36,7 @@ Route::resources([
     'organization-designation' => OrganizationDesignationController::class,
     'organization-officer' => OrganizationOfficerController::class,
     'ministry' => MinistryController::class,
+    'menu' => MenuController::class,
 ]);
 
 Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
