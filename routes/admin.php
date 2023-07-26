@@ -40,3 +40,5 @@ Route::resources([
 ]);
 
 Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
+Route::get('parent-menu', [MenuController::class, 'parentMenu'])->name('menu.parent');
+Route::get('child-menu', [MenuController::class, 'childMenu'])->name('menu.child');
