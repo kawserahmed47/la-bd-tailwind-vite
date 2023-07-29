@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+    use \Bkwld\Cloner\Cloneable;
+
 
     protected $table = 'menus';
     protected $fillable = [ 

@@ -5,8 +5,6 @@ import persist from '@alpinejs/persist'
 import Swal from 'sweetalert2'
 import 'flowbite';
 
-
-
 // jquery
 window.$ = $;
 

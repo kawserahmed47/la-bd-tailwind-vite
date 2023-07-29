@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BasicSettings\Menu;
 use App\Models\BasicSettings\MenuLabel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
 {
@@ -14,15 +15,15 @@ class MenuController extends Controller
     public function index()
     {
         $data['menu_labels'] = MenuLabel::get();
-        return view('backend.pages.menu.index', $data);
+        return view('backend.pages.menu.label.index', $data);
     }
 
     public function parentMenu()
     {
         $data['menu_labels'] = MenuLabel::with(['menus' => function($q1){
-            $q1->where('parent_id', NULL);
+            $q1->where('parent_id', NULL)->orderBy('order_id');
         }])->get();
-        return view('backend.pages.menu.parent_menu', $data);
+        return view('backend.pages.menu.parent.index', $data);
     }
 
     public function childMenu()
@@ -46,7 +47,48 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required',
+            'menu_label_id' => 'required',
+            'parent_id' => 'nullable',
+            'name' => 'required',
+            'bn_name' => 'required',
+            'slug' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'status' => 'nullable|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            $data['status'] = false;
+            $data['message'] = "Please enter all required fields!";
+            $data['errors'] = $validator->errors();
+            return response()->json($data, 400);
+        }
+
+            try {
+                $menu = new Menu();
+                $menu->order_id = $request->order_id;
+                $menu->menu_label_id = $request->menu_label_id;
+                $menu->parent_id = $request->parent_id ?  $request->parent_id : NULL;
+                $menu->name = $request->name;
+                $menu->bn_name = $request->bn_name;
+                $menu->slug = $request->slug ? $request->slug : '#' ;
+                $menu->icon = $request->icon;
+                $menu->description = $request->description;
+                $menu->status = $request->status ?? false;
+                $menu->save();
+
+                $data['status'] = true;
+                $data['message'] = "Menu saved successfully!";
+                return response()->json($data, 200);
+            } catch (\Throwable $th) {
+                $data['status'] = false;
+                $data['message'] = "Failed to save menu!";
+                $data['errors'] = $th;
+                return response()->json($data, 500);
+            }
+       
     }
 
     /**
@@ -68,16 +110,95 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required',
+            'menu_label_id' => 'required',
+            'parent_id' => 'nullable',
+            'name' => 'required',
+            'bn_name' => 'required',
+            'slug' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'status' => 'nullable|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            $data['status'] = false;
+            $data['message'] = "Please enter all required fields!";
+            $data['errors'] = $validator->errors();
+            return response()->json($data, 400);
+        }
+
+        $menu =  Menu::find($id);
+        if ($menu) {
+            try {
+                $menu->order_id = $request->order_id;
+                $menu->menu_label_id = $request->menu_label_id;
+                $menu->parent_id = $request->parent_id;
+                $menu->name = $request->name;
+                $menu->bn_name = $request->bn_name;
+                $menu->slug = $request->slug ? $request->slug : '#' ;
+                $menu->icon = $request->icon;
+                $menu->description = $request->description;
+                $menu->status = $request->status ?? false;
+                $menu->save();
+
+                $data['status'] = true;
+                $data['message'] = "Menu updated successfully!";
+                return response()->json($data, 200);
+            } catch (\Throwable $th) {
+                $data['status'] = false;
+                $data['message'] = "Failed to update menu!";
+                $data['errors'] = $th;
+                return response()->json($data, 500);
+            }
+        } else {
+            $data['status'] = false;
+            $data['message'] = "Nothing to update on menu!";
+            return response()->json($data, 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Menu $menu)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            Menu::destroy($request->id);
+            $data['status'] = true;
+            $data['message'] = "Menu removed successfully!";
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            $data['status'] = false;
+            $data['message'] = "Failed to remove menu!";
+            $data['errors'] = $th;
+            return response()->json($data, 200);
+        }
+    }
+
+    public function clone(Request $request)
+    {
+        try {
+            $clone_menu_label =  Menu::find($request->id)->duplicate();
+
+            $data_content['duplicate'] = 'Duplicate';
+            $data_content['form_action'] = route('admin.menu.update', $clone_menu_label->id);
+            $data_content['form_class'] = 'updateMenuForm';
+            $data_content['menu'] = $clone_menu_label;
+            $data_content['menu_label_id'] = $clone_menu_label->menu_label_id;
+
+            $data['status'] = true;
+            $data['html'] = view('backend.pages.menu.parent.partials.accordion', $data_content)->render();
+            $data['message'] = "Menu duplicated successfully!";
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            $data['status'] = false;
+            $data['message'] = "Failed to duplicate menu!";
+            $data['errors'] = $th;
+            return response()->json($data, 500);
+        }
     }
 }

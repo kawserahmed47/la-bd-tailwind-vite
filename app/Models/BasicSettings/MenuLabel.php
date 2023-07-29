@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class MenuLabel extends Model
 {
     use HasFactory;
+    use \Bkwld\Cloner\Cloneable;
+
 
     protected $table = 'menu_labels';
-    protected $fillable = [ 
+    protected $fillable = [
+        'order_id', 
         'name', 
         'bn_name',
         'slug',

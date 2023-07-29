@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu_labels', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('order_id');
             $table->string('name');
             $table->string('bn_name');
             $table->string('slug');
