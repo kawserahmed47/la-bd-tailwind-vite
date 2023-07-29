@@ -42,10 +42,13 @@ Route::resources([
 ]);
 
 Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
+
 Route::get('parent-menu', [MenuController::class, 'parentMenu'])->name('menu.parent');
 Route::get('child-menu', [MenuController::class, 'childMenu'])->name('menu.child');
+Route::post('menu-clone', [MenuController::class, 'clone'])->name('menu.clone');
+Route::post('menu-delete', [MenuController::class, 'destroy'])->name('menu.delete');
+
+
 Route::post('menu-label-clone', [MenuLabelController::class, 'clone'])->name('menu-label.clone');
 Route::post('menu-label-delete', [MenuLabelController::class, 'destroy'])->name('menu-label.delete');
 
-Route::post('menu-clone', [MenuController::class, 'clone'])->name('menu.clone');
-Route::post('menu-delete', [MenuController::class, 'destroy'])->name('menu.delete');

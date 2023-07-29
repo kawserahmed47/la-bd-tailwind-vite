@@ -29,9 +29,11 @@ class MenuController extends Controller
     public function childMenu()
     {
         $data['menu_labels'] = MenuLabel::with(['menus' => function($q1){
-            $q1->with('child')->where('parent_id', NULL);
+            $q1->with(['child' => function($q1){
+                $q1->orderBy('order_id');            
+            }])->where('parent_id', NULL)->orderBy('order_id');
         }])->get();
-        return view('backend.pages.menu.child_menu', $data);
+        return view('backend.pages.menu.child.index', $data);
     }
 
     /**
@@ -182,16 +184,29 @@ class MenuController extends Controller
     public function clone(Request $request)
     {
         try {
-            $clone_menu_label =  Menu::find($request->id)->duplicate();
+            $clone_menu =  Menu::find($request->id)->duplicate();
 
             $data_content['duplicate'] = 'Duplicate';
-            $data_content['form_action'] = route('admin.menu.update', $clone_menu_label->id);
+            $data_content['form_action'] = route('admin.menu.update', $clone_menu->id);
             $data_content['form_class'] = 'updateMenuForm';
-            $data_content['menu'] = $clone_menu_label;
-            $data_content['menu_label_id'] = $clone_menu_label->menu_label_id;
+            $data_content['menu_label_id'] = $clone_menu->menu_label_id;
 
+            if($request->type == 'parent'){
+                $data_content['menu'] = $clone_menu;
+                $data['html'] = view('backend.pages.menu.parent.partials.accordion', $data_content)->render();
+    
+            } else if($request->type == 'child') {
+                $data_content['child'] = $clone_menu;
+                $data_content['parent_id'] = $clone_menu->parent_id;
+                $data['html'] = view('backend.pages.menu.child.partials.accordion', $data_content)->render();
+            } else {
+                $data['status'] = false;
+                $data['message'] = "Failed to duplicate menu!";
+                return response()->json($data, 404);
+            }
+
+           
             $data['status'] = true;
-            $data['html'] = view('backend.pages.menu.parent.partials.accordion', $data_content)->render();
             $data['message'] = "Menu duplicated successfully!";
             return response()->json($data, 200);
         } catch (\Throwable $th) {

@@ -150,7 +150,8 @@
                 url: '{{route("admin.menu.clone")}}',
                 data: {
                     '_token' : '{{csrf_token()}}',
-                    'id': _this.attr('data-id')
+                    'id': _this.attr('data-id'),
+                    'type' : 'parent',
                 },
                 beforeSend: function (){
                     formLoaded.removeClass('hidden flex').addClass('flex');
