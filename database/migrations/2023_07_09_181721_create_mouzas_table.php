@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('mouzas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('bn_name');
+            $table->string('name')->nullable();
+            $table->string('bn_name')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->bigInteger('jl_no')->default(1);

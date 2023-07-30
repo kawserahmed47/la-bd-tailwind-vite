@@ -378,11 +378,54 @@ class ThanaSeeder extends Seeder
             ['id' => '362', 'district_id' => '46', 'name' => 'Shibaloy', 'bn_name' => 'শিবালয়', 'url' => 'shibaloy.manikganj.gov.bd'],
             ['id' => '363', 'district_id' => '46', 'name' => 'Doulatpur', 'bn_name' => 'দৌলতপুর', 'url' => 'doulatpur.manikganj.gov.bd'],
             ['id' => '364', 'district_id' => '46', 'name' => 'Singiar', 'bn_name' => 'সিংগাইর', 'url' => 'singiar.manikganj.gov.bd'],
+            
             ['id' => '365', 'district_id' => '47', 'name' => 'Savar', 'bn_name' => 'সাভার', 'url' => 'savar.dhaka.gov.bd'],
             ['id' => '366', 'district_id' => '47', 'name' => 'Dhamrai', 'bn_name' => 'ধামরাই', 'url' => 'dhamrai.dhaka.gov.bd'],
             ['id' => '367', 'district_id' => '47', 'name' => 'Keraniganj', 'bn_name' => 'কেরাণীগঞ্জ', 'url' => 'keraniganj.dhaka.gov.bd'],
             ['id' => '368', 'district_id' => '47', 'name' => 'Nawabganj', 'bn_name' => 'নবাবগঞ্জ', 'url' => 'nawabganj.dhaka.gov.bd'],
             ['id' => '369', 'district_id' => '47', 'name' => 'Dohar', 'bn_name' => 'দোহার', 'url' => 'dohar.dhaka.gov.bd'],
+            
+            // start::addition later
+            ['id' => '563', 'district_id' => '47', 'name' => 'Adabor', 'bn_name' => 'আদাবর', 'url' => 'adabor.dhaka.gov.bd'],
+            ['id' => '564', 'district_id' => '47', 'name' => 'Airport', 'bn_name' => 'এয়ারপোর্ট', 'url' => 'airport.dhaka.gov.bd'],
+            ['id' => '565', 'district_id' => '47', 'name' => 'Badda', 'bn_name' => 'বাড্ডা', 'url' => 'badda.dhaka.gov.bd'],
+            ['id' => '566', 'district_id' => '47', 'name' => 'Banani', 'bn_name' => 'বনানী', 'url' => 'banani.dhaka.gov.bd'],
+            ['id' => '567', 'district_id' => '47', 'name' => 'Bangshal', 'bn_name' => 'বংশাল', 'url' => 'bangshal.dhaka.gov.bd'],
+            
+            ['id' => '568', 'district_id' => '47', 'name' => 'Bhashantek', 'bn_name' => 'ভাষানটেক', 'url' => 'bhashantek.dhaka.gov.bd'],
+            ['id' => '569', 'district_id' => '47', 'name' => 'Cantonment', 'bn_name' => 'ক্যান্টনমেন্ট', 'url' => 'cantonment.dhaka.gov.bd'],
+            ['id' => '570', 'district_id' => '47', 'name' => 'Chackbazar', 'bn_name' => 'চকবাজার', 'url' => 'chackbazar.dhaka.gov.bd'],
+            ['id' => '571', 'district_id' => '47', 'name' => 'Darussalam', 'bn_name' => 'দারুস সালাম', 'url' => 'sarussalam.dhaka.gov.bd'],
+            ['id' => '572', 'district_id' => '47', 'name' => 'Dakshinkhan', 'bn_name' => 'দক্ষিণখান', 'url' => 'daskhinkhan.dhaka.gov.bd'],
+            
+            ['id' => '573', 'district_id' => '47', 'name' => 'Demra', 'bn_name' => 'ডেমরা', 'url' => 'demra.dhaka.gov.bd'],
+            ['id' => '574', 'district_id' => '47', 'name' => 'Dhanmondi', 'bn_name' => 'ধানমন্ডি', 'url' => 'dhanmondi.dhaka.gov.bd'],
+            ['id' => '575', 'district_id' => '47', 'name' => 'Gandaria', 'bn_name' => 'গেন্ডারিয়া', 'url' => 'dandaria.dhaka.gov.bd'],
+            ['id' => '576', 'district_id' => '47', 'name' => 'Gulshan', 'bn_name' => 'গুলশান', 'url' => 'gulshan.dhaka.gov.bd'],
+            ['id' => '578', 'district_id' => '47', 'name' => 'Hazaribag', 'bn_name' => 'হাজারীবাগ', 'url' => 'hazaribag.dhaka.gov.bd'],
+            
+            ['id' => '579', 'district_id' => '47', 'name' => 'Jatrabari', 'bn_name' => 'যাত্রাবাড়ী', 'url' => 'jatrabari.dhaka.gov.bd'],
+            ['id' => '580', 'district_id' => '47', 'name' => 'Kafrul', 'bn_name' => 'কাফরুল', 'url' => 'kafrul.dhaka.gov.bd'],
+            ['id' => '581', 'district_id' => '47', 'name' => 'Kalabagan', 'bn_name' => 'কলাবাগান', 'url' => 'kalabagan.dhaka.gov.bd'],
+            ['id' => '582', 'district_id' => '47', 'name' => 'Kamrangirchar', 'bn_name' => 'কামরাঙ্গীরচর', 'url' => 'kamrangirchar.dhaka.gov.bd'],
+            ['id' => '583', 'district_id' => '47', 'name' => 'Khilgaon', 'bn_name' => 'খিলগাঁও', 'url' => 'khilgaon.dhaka.gov.bd'],
+            
+            ['id' => '584', 'district_id' => '47', 'name' => 'Khilkhet', 'bn_name' => 'খিলক্ষেত ', 'url' => 'khilkhet.dhaka.gov.bd'],
+            ['id' => '585', 'district_id' => '47', 'name' => 'Kotwali', 'bn_name' => 'কোতোয়ালী', 'url' => 'kotwali.dhaka.gov.bd'],
+         
+            ['id' => '586', 'district_id' => '47', 'name' => 'Uttara East Thana', 'bn_name' => 'উত্তরা পূর্ব থানা', 'url' => 'uttara-east.dahaka.gov.bd'],
+            ['id' => '587', 'district_id' => '47', 'name' => 'Pallabi Thana', 'bn_name' => 'পল্লবি থানা', 'url' => 'pallabi.dhaka.gov.bd'],
+            ['id' => '588', 'district_id' => '47', 'name' => 'Mirpur Model Thana', 'bn_name' => 'মিরপুর থানা', 'url' => 'mirpur-model.dhaka.gov.bd'],
+            ['id' => '589', 'district_id' => '47', 'name' => 'Sabujbagh Thana', 'bn_name' => 'সবুজবাঘ থানা', 'url' => 'sabujbagh.dhaka.gov.bd'],
+            ['id' => '590', 'district_id' => '47', 'name' => 'Motijheel Thana', 'bn_name' => 'মতিঝিল থানা', 'url' => 'motijheel.dhaka.gov.bd'],
+            ['id' => '591', 'district_id' => '47', 'name' => 'Sutrapur Thana', 'bn_name' => 'সুত্রাপুর থানা', 'url' => 'sutrapur.dhaka.gov.bd'],
+            ['id' => '592', 'district_id' => '47', 'name' => 'Tejgaon Thana', 'bn_name' => 'তেজগাঁও থানা', 'url' => 'tejgaon.dhaka.gov.bd'],
+            ['id' => '593', 'district_id' => '47', 'name' => 'Mohammadpur', 'bn_name' => 'মহম্মদপুর', 'url' => 'mohammadpur.dhaka.gov.bd'],
+            ['id' => '594', 'district_id' => '47', 'name' => 'Lalbagh Thana', 'bn_name' => 'লালবাঘ থানা', 'url' => 'lalbag.dhaka.gov.bd'],
+            ['id' => '595', 'district_id' => '47', 'name' => 'Ramna Thana', 'bn_name' => 'রমনা থানা', 'url' => 'debidwar.comilla.gov.bd'],
+
+            //end:: addition later
+            
             ['id' => '370', 'district_id' => '48', 'name' => 'Munshiganj Sadar', 'bn_name' => 'মুন্সিগঞ্জ সদর', 'url' => 'sadar.munshiganj.gov.bd'],
             ['id' => '371', 'district_id' => '48', 'name' => 'Sreenagar', 'bn_name' => 'শ্রীনগর', 'url' => 'sreenagar.munshiganj.gov.bd'],
             ['id' => '372', 'district_id' => '48', 'name' => 'Sirajdikhan', 'bn_name' => 'সিরাজদিখান', 'url' => 'sirajdikhan.munshiganj.gov.bd'],
@@ -552,6 +595,7 @@ class ThanaSeeder extends Seeder
             ['id' => '533', 'district_id' => '65', 'name' => 'Wari Thana', 'bn_name' => 'ওয়ারি থানা', 'url' => 'debidwar.comilla.gov.bd'],
             ['id' => '534', 'district_id' => '65', 'name' => 'Uttara East Thana', 'bn_name' => 'উত্তরা পূর্ব থানা', 'url' => 'debidwar.comilla.gov.bd'],
             ['id' => '535', 'district_id' => '65', 'name' => 'Dakshinkhan Thana', 'bn_name' => 'দক্ষিনখান থানা', 'url' => 'debidwar.comilla.gov.bd'],
+            
             ['id' => '536', 'district_id' => '66', 'name' => 'Akbarshah Thana', 'bn_name' => 'আকবরশাহ থানা', 'url' => 'debidwar.comilla.gov.bd'],
             ['id' => '537', 'district_id' => '66', 'name' => 'Bakoliya Thana', 'bn_name' => 'বাকোলিয়া থানা', 'url' => 'debidwar.comilla.gov.bd'],
             ['id' => '538', 'district_id' => '66', 'name' => 'Bandar Thana', 'bn_name' => 'বন্দর থানা', 'url' => 'debidwar.comilla.gov.bd'],

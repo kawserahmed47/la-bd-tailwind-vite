@@ -14,8 +14,8 @@ class MenuLabelSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['id' => 1, 'name' => 'Main', 'bn_name' => 'মেইন', 'slug'=> 'main', 'description'=> null, 'status'=> true ],
-            ['id' => 2, 'name' => 'Others', 'bn_name' => 'অন্যান্য', 'slug'=> 'others', 'description'=> null, 'status'=> true ]
+            ['id' => 1, 'order_id'=> 1, 'name' => 'Main', 'bn_name' => 'মেইন', 'slug'=> 'main', 'description'=> null, 'status'=> true ],
+            ['id' => 2, 'order_id'=> 2, 'name' => 'Others', 'bn_name' => 'অন্যান্য', 'slug'=> 'others', 'description'=> null, 'status'=> true ]
         ];
         MenuLabel::insert($data);
     }

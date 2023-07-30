@@ -94,8 +94,8 @@ class MenuSeeder extends Seeder
                 [ 'id' => 31, 'menu_label_id' => 1, 'order_id' => 3, 'parent_id' => 28, 'name'=> 'Acquisition Rate', 'bn_name' => 'ক্ষতিপূরণের মূল্যহার', 'slug'=> 'acquisition-rate', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 32, 'menu_label_id' => 1, 'order_id' => 4, 'parent_id' => 28, 'name'=> 'Acquisition Attachment', 'bn_name' => 'ক্ষতিপূরণের সংযুক্তি', 'slug'=> 'acquisition-attachment', 'icon' => null, 'description'=> null, 'status' => true ],
 
-            [ 'id' => 33, 'menu_label_id' => 1, 'order_id' => 6, 'parent_id' => null,  'name'=> 'Joint Investigation Report', 'bn_name' => 'যৌথ তদন্ত প্রতিবেদন', 'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 12 5.419 3.871A1 1 0 0 0 16 15.057V2.943a1 1 0 0 0-1.581-.814L9 6m0 6V6m0 6H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h7m-5 6h3v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5Zm15-3a3 3 0 0 1-3 3V6a3 3 0 0 1 3 3Z"></path>
+            [ 'id' => 33, 'menu_label_id' => 1, 'order_id' => 6, 'parent_id' => null,  'name'=> 'Joint Investigation Report', 'bn_name' => 'যৌথ তদন্ত প্রতিবেদন', 'slug'=> '#', 'icon' => '<svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M1 10c1.5 1.5 5.25 3 9 3s7.5-1.5 9-3m-9-1h.01M2 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1ZM14 5V3a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2h8Z"/>
           </svg>', 'description'=> null, 'status' => true ],
                 [ 'id' => 34, 'menu_label_id' => 1, 'order_id' => 1, 'parent_id' => 33, 'name'=> 'Dag Shuchi', 'bn_name' => 'দাগ সুচি', 'slug'=> 'dag-shuchi', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 35, 'menu_label_id' => 1, 'order_id' => 2, 'parent_id' => 33, 'name'=> 'Khatian', 'bn_name' => 'খতিয়ান তৈরী', 'slug'=> 'khatian', 'icon' => null, 'description'=> null, 'status' => true ],
@@ -109,12 +109,16 @@ class MenuSeeder extends Seeder
                 [ 'id' => 43, 'menu_label_id' => 1, 'order_id' => 10, 'parent_id' => 33, 'name'=> 'Joint Investigation Field', 'bn_name' => 'যৌথ তদন্ত ফিল্ড বহি', 'slug'=> 'joint-investigation-field', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 44, 'menu_label_id' => 1, 'order_id' => 11, 'parent_id' => 33, 'name'=> 'Class Change', 'bn_name' => 'শ্রেণি পরিবর্তন', 'slug'=> 'class-change', 'icon' => null, 'description'=> null, 'status' => true ],
                 
+                [ 'id' => 45, 'menu_label_id' => 1, 'order_id' => 7, 'parent_id' => null,   'name'=> 'Notice', 'bn_name' => 'বিজ্ঞপ্তি',  'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 12 5.419 3.871A1 1 0 0 0 16 15.057V2.943a1 1 0 0 0-1.581-.814L9 6m0 6V6m0 6H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h7m-5 6h3v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5Zm15-3a3 3 0 0 1-3 3V6a3 3 0 0 1 3 3Z"></path>
+              </svg>', 'description'=> null, 'status' => true ],
+
                 [ 'id' => 46, 'menu_label_id' => 1, 'order_id' => 1, 'parent_id' => 45, 'name'=> 'Notice Create', 'bn_name' => 'বিজ্ঞপ্তি তৈরী', 'slug'=> 'notice/create', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 47, 'menu_label_id' => 1, 'order_id' => 2, 'parent_id' => 45, 'name'=> 'Notice List', 'bn_name' => 'বিজ্ঞপ্তি তালিকা', 'slug'=> 'notice', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 48, 'menu_label_id' => 1, 'order_id' => 3, 'parent_id' => 45, 'name'=> 'Requisition Create', 'bn_name' => 'চাহিদাপত্র তৈরী', 'slug'=> 'requisition/create', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 49, 'menu_label_id' => 1, 'order_id' => 4, 'parent_id' => 45, 'name'=> 'Requisition List', 'bn_name' => 'চাহিদাপত্র তালিকা', 'slug'=> 'requisition', 'icon' => null, 'description'=> null, 'status' => true ],
 
-            [ 'id' => 50, 'menu_label_id' => 1, 'order_id' => 8, 'parent_id' => null,   'name'=> 'Application', 'bn_name' => 'আবেদন',  'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            [ 'id' => 50, 'menu_label_id' => 1, 'order_id' => 8, 'parent_id' => null,   'name'=> 'Application', 'bn_name' => 'আবেদন',  'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v3m5-3v3m5-3v3M1 7h7m1.506 3.429 2.065 2.065M19 7h-2M2 3h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm6 13H6v-2l5.227-5.292a1.46 1.46 0 0 1 2.065 2.065L8 16Z"></path>
           </svg>', 'description'=> null, 'status' => true ],
                 [ 'id' => 51, 'menu_label_id' => 1, 'order_id' => 1, 'parent_id' => 50, 'name'=> 'New Application', 'bn_name' => 'নতুন আবেদন', 'slug'=> 'application-draft', 'icon' => null, 'description'=> null, 'status' => true ],
@@ -122,13 +126,13 @@ class MenuSeeder extends Seeder
                 [ 'id' => 53, 'menu_label_id' => 1, 'order_id' => 3, 'parent_id' => 50, 'name'=> 'Pending Application',  'bn_name' => 'অমীমাংসিত আবেদন', 'slug'=> 'application-pending', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 54, 'menu_label_id' => 1, 'order_id' => 4, 'parent_id' => 50, 'name'=> 'All Application', 'bn_name' => 'সকল আবেদন', 'slug'=> 'application', 'icon' => null, 'description'=> null, 'status' => true ],
                 
-            [ 'id' => 55, 'menu_label_id' => 1, 'order_id' => 9, 'parent_id' => null,   'name'=> 'Miss Case', 'bn_name' => 'মিস কেস',  'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+            [ 'id' => 55, 'menu_label_id' => 1, 'order_id' => 9, 'parent_id' => null,   'name'=> 'Miss Case', 'bn_name' => 'মিস কেস',  'slug'=> '#', 'icon' => '<svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 14 3-3m-3 3 3 3m-3-3h16v-3m2-7-3 3m3-3-3-3m3 3H3v3"></path>
           </svg>', 'description'=> null, 'status' => true ],
                 [ 'id' => 56, 'menu_label_id' => 1, 'order_id' => 1, 'parent_id' => 55, 'name'=> 'Miss Case', 'bn_name' => 'মিস কেস তৈরী', 'slug'=> 'miss-case/create', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 57, 'menu_label_id' => 1, 'order_id' => 2, 'parent_id' => 55, 'name'=> 'Miss Case List', 'bn_name' => 'মিস কেস তালিকা', 'slug'=> 'miss-case', 'icon' => null, 'description'=> null, 'status' => true ],
 
-            [ 'id' => 58, 'menu_label_id' => 2, 'order_id' => 10, 'parent_id' => null,   'name'=> 'Estimation', 'bn_name' => 'প্রাক্কলন',  'slug'=> 'estimation', 'icon' => '<svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+            [ 'id' => 58, 'menu_label_id' => 2, 'order_id' => 10, 'parent_id' => null,   'name'=> 'Estimation', 'bn_name' => 'প্রাক্কলন',  'slug'=> 'estimation', 'icon' => '<svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"></path>
           </svg>', 'description'=> null, 'status' => true ],
             [ 'id' => 59, 'menu_label_id' => 2, 'order_id' => 11, 'parent_id' => null,   'name'=> 'Firman', 'bn_name' => 'আদেশ পত্র',  'slug'=> 'firman', 'icon' => '<svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
