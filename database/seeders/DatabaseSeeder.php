@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             AcquisitionClassSeeder::class,
             AreaSeeder::class,
             BankSeeder::class,
+            OrganizationSeeder::class,
             MinistrySeeder::class,
             ReligionSeeder::class
         ]);

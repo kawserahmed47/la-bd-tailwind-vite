@@ -158,6 +158,7 @@ class OrganizationController extends Controller
         if (!$data['organization']) {
             abort(404);
         }
+        // return response()->json($data, 200);
 
         $config = [
             'mode' => 'utf-8', // Set the character encoding

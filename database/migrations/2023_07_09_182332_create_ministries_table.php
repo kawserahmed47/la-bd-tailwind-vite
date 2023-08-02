@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('bn_name');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->string('url')->nullable();
             $table->text('address')->nullable();
             $table->text('description')->nullable();

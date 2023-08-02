@@ -42,6 +42,10 @@ Route::resources([
 ]);
 
 Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
+Route::get('organization-office-download/{slug}',[OrganizationOfficeController::class, 'download'])->name('organization-office.download');
+Route::get('organization-designation-download/{slug}',[OrganizationDesignationController::class, 'download'])->name('organization-designation.download');
+
+Route::get('ministry-download/{slug}',[MinistryController::class, 'download'])->name('ministry.download');
 
 Route::get('parent-menu', [MenuController::class, 'parentMenu'])->name('menu.parent');
 Route::get('child-menu', [MenuController::class, 'childMenu'])->name('menu.child');

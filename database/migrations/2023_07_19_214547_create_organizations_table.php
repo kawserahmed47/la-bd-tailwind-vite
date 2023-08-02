@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('bn_name');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->timestamps();
