@@ -179,4 +179,37 @@ class OrganizationController extends Controller
  
     
     }
+
+
+    public function officeAndDesignationOptions(Request $request)
+    {
+        $organization = Organization::with('offices', 'designations')->where('id', $request->id)->first();
+        $office_options = '<option value="">Select Office</option>';
+        $designation_options = '<option value="">Select Designation</option>';
+
+        if ($organization) {
+            if(count($organization->offices)){
+                foreach ($organization->offices as $office) {
+                    $office_options .='<option value="'.$office->id.'">'.$office->name.'</option>';
+                }
+            }
+            if(count($organization->designations)){
+                foreach ($organization->designations as $designation) {
+                    $designation_options .='<option value="'.$designation->id.'">'.$designation->name.'</option>';
+                }
+            }
+
+            $data['status'] = true;
+            $data['message'] = 'Options Successfully Loaded';
+            $data['office_options'] = $office_options;
+            $data['designation_options'] = $designation_options;
+            return response()->json($data, 200);
+        } else {
+            $data['status'] = false;
+            $data['message'] = 'Options Not Found!';
+            $data['office_options'] = $office_options;
+            $data['designation_options'] = $designation_options;
+            return response()->json($data, 404);
+        }
+    }
 }

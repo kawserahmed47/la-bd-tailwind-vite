@@ -41,6 +41,9 @@
                                 <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                                     Name
                                 </th>
+                                <th class="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                                    Organization
+                                </th>
                                 <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
                                     Created at
                                 </th>
@@ -61,6 +64,9 @@
                                             <h5 class="font-medium text-black dark:text-white">{{ $organization_designation->name }}
                                             </h5>
                                             <p class="text-sm">{{ $organization_designation->bn_name }}</p>
+                                        </td>
+                                        <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
+                                            <p class="text-black dark:text-white">{{ $organization_designation->organization->name }} </p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                             <p class="text-black dark:text-white">{{ date('F d, Y', strtotime($organization_designation->updated_at)) }} </p>

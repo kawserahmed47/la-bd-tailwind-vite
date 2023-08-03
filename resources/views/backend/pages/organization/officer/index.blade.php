@@ -1,4 +1,4 @@
-@extends('backend.master', ['title' => 'Organization Office List', 'page' => 'organization-office'])
+@extends('backend.master', ['title' => 'Organization Officer List', 'page' => 'organization-officer'])
 
 @push('css')
 @endpush
@@ -6,13 +6,13 @@
 @section('content')
     <div class="mx-auto max-w-screen-2xl p-4 md:p-3 2xl:p-5">
         @include('backend.partials.breadcrumb', [
-            'breadcrumb_heading' => 'Organization Office List',
+            'breadcrumb_heading' => 'Organization Officer List',
         
-            'breadcrumb_title' => 'Organization Office',
-            'breadcrumb_title_url' => route('admin.organization-office.index'),
+            'breadcrumb_title' => 'Organization Officer',
+            'breadcrumb_title_url' => route('admin.organization-officer.index'),
         
             'breadcrumb_subtitle' => 'List',
-            'breadcrumb_subtitle_url' => route('admin.organization-office.index'),
+            'breadcrumb_subtitle_url' => route('admin.organization-officer.index'),
         ])
 
         <div class="flex flex-col gap-10">
@@ -21,8 +21,8 @@
                 class="rounded-sm border border-stroke bg-white px-3  pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-5.5 xl:pb-1">
                 <div
                     class="flex flex-col border-b border-[#eee]  sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
-                    <h2 class="text-bold text-lg font-weight-bolder">Latest organization office list</h2>
-                    <a href="{{ route('admin.organization-office.create') }}"
+                    <h2 class="text-bold text-lg font-weight-bolder">Latest organization officer list</h2>
+                    <a href="{{ route('admin.organization-officer.create') }}"
                         class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
                         <span>
                             <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -34,12 +34,15 @@
                         Create New
                     </a>
                 </div>
-                <div class="relative max-w-full overflow-x-auto pb-5 organization-office-table-section">
+                <div class="relative max-w-full overflow-x-auto pb-5 organization-officer-table-section">
                     <table class="w-full table-auto">
                         <thead>
                             <tr class="bg-gray-2 text-left dark:bg-meta-4">
                                 <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                                     Name
+                                </th>
+                                <th class="py-4 px-4 font-medium text-black dark:text-white">
+                                    Contact
                                 </th>
                                 <th class="py-4 px-4 font-medium text-black dark:text-white">
                                     Organization
@@ -57,30 +60,33 @@
                         </thead>
                         <tbody>
 
-                            @if (count($organization_offices))
-                                @foreach ($organization_offices as $organization_office)
+                            @if (count($organization_officers))
+                                @foreach ($organization_officers as $organization_officer)
                                     <tr>
                                         <td class="border-b border-[#eee] py-3 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                            <h5 class="font-medium text-black dark:text-white">{{ $organization_office->name }}
-                                            </h5>
-                                            <p class="text-sm">{{ $organization_office->bn_name }}</p>
+                                            <h5 class="font-medium text-black dark:text-white">{{ $organization_officer->user->name ?? '' }}</h5>
+                                            <p class="text-sm">{{ $organization_officer->designation->name }}</p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">{{$organization_office->organization->name}} </p>
+                                            <a href="tel:{{ $organization_officer->user->mobile ?? '' }}" class="text-black dark:text-white">{{ $organization_officer->user->mobile ?? '' }}</a>
+                                            <a href="mailto:{{$organization_officer->user->email ?? ''}}" class="text-sm">{{ $organization_officer->user->email ?? '' }}</a>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">{{ date('F d, Y', strtotime($organization_office->updated_at)) }} </p>
+                                            <p class="text-black dark:text-white">{{ $organization_officer->office->name ?? '' }}</p>
+                                            <p class="text-sm">{{ $organization_officer->office->organization->name ?? '' }}</p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
-                                            <p
-                                                class="inline-flex rounded-full  {{ $organization_office->status ? 'bg-success text-success' : 'bg-danger text-danger' }}  bg-opacity-10 py-1 px-3 text-sm font-medium">
-                                                {{ $organization_office->status ? 'Active' : 'Inactive' }}
+                                            <p class="text-black dark:text-white">{{ date('M d, Y', strtotime($organization_officer->updated_at)) }} </p>
+                                        </td>
+                                        <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
+                                            <p class="inline-flex rounded-full  {{ $organization_officer->status ? 'bg-success text-success' : 'bg-danger text-danger' }}  bg-opacity-10 py-1 px-3 text-sm font-medium">
+                                                {{ $organization_officer->status ? 'Active' : 'Inactive' }}
                                             </p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                             <div class="flex items-center space-x-3.5">
                                                 <a data-tooltip-target="tooltip-edit" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-office.edit', $organization_office->id) }}"
+                                                    href="{{ route('admin.organization-officer.edit', $organization_officer->id) }}"
                                                     class="hover:text-primary">
                                                     <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -92,7 +98,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-show" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-office.show', $organization_office->id) }}"
+                                                    href="{{ route('admin.organization-officer.show', $organization_officer->id) }}"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"
                                                         height="18" viewBox="0 0 18 18" fill="none"
@@ -107,7 +113,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-download" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-office.download', $organization_office->slug) }}"
+                                                    href="{{ route('admin.organization-officer.download', $organization_officer->id) }}"
                                                     target="_blank"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"
@@ -122,8 +128,8 @@
                                                     </svg>
                                                 </a>
 
-                                                <form class="organization-office-delete-form" method="POST"
-                                                    action="{{ route('admin.organization-office.destroy', $organization_office->id) }}">
+                                                <form class="organization-officer-delete-form" method="POST"
+                                                    action="{{ route('admin.organization-officer.destroy', $organization_officer->id) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" data-tooltip-target="tooltip-delete"
@@ -175,10 +181,10 @@
 @endsection
 @push('js')
     <script type="module">
-    $(document).on('submit', '.organization-office-delete-form', function(e){
+    $(document).on('submit', '.organization-officer-delete-form', function(e){
         e.preventDefault()
         let _this = $(this);
-        let formLoaded = _this.closest('.organization-office-table-section').find('.form-loaded');
+        let formLoaded = _this.closest('.organization-officer-table-section').find('.form-loaded');
 
 
         Swal.fire({

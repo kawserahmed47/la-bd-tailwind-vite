@@ -42,8 +42,11 @@ Route::resources([
 ]);
 
 Route::get('organization-download/{slug}',[OrganizationController::class, 'download'])->name('organization.download');
+Route::get('organization-office-and-designation-options', [OrganizationController::class, 'officeAndDesignationOptions'])->name('organization.office.designation.options');
+
 Route::get('organization-office-download/{slug}',[OrganizationOfficeController::class, 'download'])->name('organization-office.download');
 Route::get('organization-designation-download/{slug}',[OrganizationDesignationController::class, 'download'])->name('organization-designation.download');
+Route::get('organization-officer-download/{id}',[OrganizationOfficerController::class, 'download'])->name('organization-officer.download');
 
 Route::get('ministry-download/{slug}',[MinistryController::class, 'download'])->name('ministry.download');
 

@@ -40,4 +40,16 @@ class Organization extends Model
         }
         return $slug;
     }
+
+
+    public function offices()
+    {
+        return $this->hasMany(OrganizationOffice::class, 'organization_id', 'id');
+    }
+
+    public function designations()
+    {
+        return $this->hasMany(OrganizationDesignation::class, 'organization_id', 'id');
+    }
+
 }
