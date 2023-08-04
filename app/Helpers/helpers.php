@@ -21,5 +21,34 @@ if (! function_exists('menuLabels')) {
     }
 }
 
+if(! function_exists('projectStatus')){
+    function projectStatus()
+    {
+        $data= [
+            "draft" => [
+                'name' => 'Draft',
+                'bn_name' => 'খসড়া',
+                'color' => 'bg-status-draft'
+            ] ,
+            'current' => [
+                'name' => 'Current',
+                'bn_name' => 'চলমান',
+                'color' => 'bg-status-current'
+            ],
+            'pending' => [
+                'name' => 'Pending',
+                'bn_name' => 'অমীমাংসিত',
+                'color' => 'bg-status-pending'
+            ],
+            'finished' => [
+                'name' => 'Finished',
+                'bn_name' => 'সমাপ্ত',
+                'color' => 'bg-status-finished'
+            ]
+        ];
+        return $data;
+    }
+}
+
 
 ?>

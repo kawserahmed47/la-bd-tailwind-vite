@@ -13,23 +13,17 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('system_id')->unique();
-            $table->string('name')->unique();
-            $table->string('bn_name')->unique();
-            $table->string('slug')->unique();
+            $table->bigInteger('project_id')->unique();
+            $table->string('name')->nullable();
+            $table->string('bn_name')->nullable();
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['draft', 'current', 'pending', 'finished'])->default('draft');
-
-
-            $table->foreignId('institute_id')->constrained('institutes')->onDelete('cascade');
+            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             $table->foreignId('ministry_id')->constrained('ministries')->onDelete('cascade');
-            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
             $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
-            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
-
-            
-            $table->foreignId('created_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('updated_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->constrained('users')->nullable();
             $table->timestamps();
         });
     }

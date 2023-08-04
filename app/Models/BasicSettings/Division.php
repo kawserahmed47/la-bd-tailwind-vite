@@ -39,6 +39,12 @@ class Division extends Model
             return "{$slug}-2";
         }
         return $slug;
-    }  
+    } 
+    
+    
+    public function districts()
+    {
+        return $this->hasMany(District::class, 'division_id', 'id');
+    }
 
 }

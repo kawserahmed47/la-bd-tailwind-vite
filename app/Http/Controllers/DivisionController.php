@@ -7,6 +7,38 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
+
+    public function options(Request $request)
+    {
+        $division = Division::with(['districts' => function($q1){
+            $q1->where('status', true)->orderBy('name', 'asc');
+        }])->find($request->id);
+
+        $district_options = '<option value="">Select District</option>';
+
+        if($division){
+            if(count($division->districts)){
+                foreach ($division->districts as $district) {
+                    $district_options .='<option value="'.$district->id.'">'.$district->name.'</option>';
+                }
+            }
+            $data['district_options'] = $district_options;
+            $data['division'] = $division;
+            $data['message'] = 'Select Next Options!';
+            $data['status'] = true;
+            return response()->json($data, 200);
+        } else {
+            $data['district_options'] = $district_options;
+            $data['division'] = $division;
+            $data['message'] = 'Options Failed!';
+            $data['status'] = false;
+            return response()->json($data, 500);
+        }
+
+       
+
+    }
+
     /**
      * Display a listing of the resource.
      */
