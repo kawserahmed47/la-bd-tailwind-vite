@@ -183,7 +183,7 @@
                                             class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90" />
                                     </div>
 
-                                    <button type="button"
+                                    {{-- <button type="button"
                                         class="flex w-full items-center justify-center gap-3.5 font-medium rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-70 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-70">
                                         <span>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -210,7 +210,7 @@
                                             </svg>
                                         </span>
                                         Login with Google
-                                    </button>
+                                    </button> --}}
 
                                     <div class="mt-6 text-center">
                                         <p class="font-medium">

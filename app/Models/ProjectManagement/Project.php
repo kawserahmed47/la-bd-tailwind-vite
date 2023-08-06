@@ -63,5 +63,10 @@ class Project extends Model
         return $this->belongsTo(Organization::class, 'organization_id', 'id');
     }
 
+    public function organization_officers()
+    {
+        return $this->hasMany(ProjectOrganizationOfficer::class, 'project_id', 'id');
+    }
+
 
 }

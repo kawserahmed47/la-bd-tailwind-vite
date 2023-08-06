@@ -2,18 +2,6 @@
 
 @push('css')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-    <style>
-        /* Custom styles for the active and hidden tabs */
-        .tab-btn.active-tab {
-            background-color: #4b5563;
-            color: #ffffff;
-        }
-
-        .tab-content.hidden-content {
-            display: none;
-        }
-    </style>
 @endpush
 
 @section('content')

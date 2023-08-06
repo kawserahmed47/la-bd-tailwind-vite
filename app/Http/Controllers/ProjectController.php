@@ -6,6 +6,8 @@ use App\Models\BasicSettings\District;
 use App\Models\BasicSettings\Division;
 use App\Models\BasicSettings\Ministry;
 use App\Models\BasicSettings\Organization;
+use App\Models\BasicSettings\OrganizationDesignation;
+use App\Models\BasicSettings\OrganizationOffice;
 use App\Models\ProjectManagement\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +52,21 @@ class ProjectController extends Controller
     {
         $data['projects'] = Project::where('status', 'pending')->latest()->get();
         return view('backend.pages.project.pending', $data);
+    }
+
+    public function officers($id){
+        $project = Project::with(['organization_officers' => function($q1){
+            $q1->with(['officer' => function($q2){
+                $q2->with('office', 'designation', 'user');
+            }]);
+        }])->with('organization')->find($id);
+
+        $data['organization_offices'] = OrganizationOffice::where('organization_id', $project->organization_id )->get();
+        $data['organization_designations'] = OrganizationDesignation::where('organization_id', $project->organization_id )->get();
+
+        $data['project'] = $project;
+        // return response()->json($data, 200);
+        return view('backend.pages.project.organization_officers.index', $data);
     }
 
     /**

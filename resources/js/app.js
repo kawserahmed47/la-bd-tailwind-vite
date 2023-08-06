@@ -4,6 +4,7 @@ import Alpine from 'alpinejs'
 import persist from '@alpinejs/persist'
 import Swal from 'sweetalert2'
 import 'flowbite';
+import { Modal } from 'flowbite';
 
 // jquery
 window.$ = $;

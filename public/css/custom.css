@@ -1,0 +1,9 @@
+ /* Custom styles for the active and hidden tabs */
+ .tab-btn.active-tab {
+    background-color: #4b5563;
+    color: #ffffff;
+}
+
+.tab-content.hidden-content {
+    display: none;
+}

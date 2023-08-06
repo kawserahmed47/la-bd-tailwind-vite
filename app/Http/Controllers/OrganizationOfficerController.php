@@ -253,4 +253,30 @@ class OrganizationOfficerController extends Controller
 
 
     }
+
+    public function options(Request $request)
+    {
+        $officers = OrganizationOfficer::with('user')->where('organization_office_id', $request->organization_office_id)
+        ->where('organization_designation_id', $request->organization_designation_id)
+        ->get();
+
+        $options = '<option value="">Select Officer</option>';
+
+        if(count($officers)){
+            foreach ($officers as $officer) {
+                $options .= '<option value="'.$officer->id.'">'.$officer->user->name.'</option>';
+            }
+            
+            $data['status'] = true;
+            $data['message'] = "Select Next Options";
+            $data['html'] = $options;
+            return response()->json($data, 200);        
+        } else {
+            $data['status'] = false;
+            $data['message'] = "No Officers found!";
+            $data['html'] = $options;
+            return response()->json($data, 404);   
+        }
+
+    }
 }

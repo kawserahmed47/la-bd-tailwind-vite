@@ -6,6 +6,7 @@
   <link rel="icon" type="image/x-icon" href="{{asset('images/favicon/favicon.ico')}}">
 
   <!-- Styles -->
+  <link rel="stylesheet" href="{{asset('css/custom.css')}}">
   <link rel="stylesheet" href="{{asset('build/assets/app-161dc360.css')}}">
   <script src="{{asset('build/assets/app-aad19087.js')}}"></script>
 
