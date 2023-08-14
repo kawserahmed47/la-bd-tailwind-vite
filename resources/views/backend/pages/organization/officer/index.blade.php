@@ -113,7 +113,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-download" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-officer.download', $organization_officer->id) }}"
+                                                    href="{{ route('admin.download.organization-officer', $organization_officer->id) }}"
                                                     target="_blank"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"

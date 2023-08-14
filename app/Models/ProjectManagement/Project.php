@@ -5,6 +5,7 @@ namespace App\Models\ProjectManagement;
 use App\Models\BasicSettings\District;
 use App\Models\BasicSettings\Ministry;
 use App\Models\BasicSettings\Organization;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -61,6 +62,10 @@ class Project extends Model
 
     public function organization(){
         return $this->belongsTo(Organization::class, 'organization_id', 'id');
+    }
+
+    public function section(){
+        return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
     public function organization_officers()

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status', ['draft', 'current', 'pending', 'finished'])->default('draft');
             $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             $table->foreignId('ministry_id')->constrained('ministries')->onDelete('cascade');
+            $table->foreignId('section_id')->constrained('sections')->onDelete('cascade');
             $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('updated_by')->constrained('users')->nullable();

@@ -119,12 +119,16 @@
                                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                         <div class="w-full xl:w-1/2">
                                             <div class="mb-6">
-                                                <label for="description" class="mb-2.5 block text-black dark:text-white">
-                                                    Description
-                                                </label>
-                                                <textarea rows="1" id="description" name="description" placeholder="Type project description"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
-                                                    <small class="error error-description text-danger text-sm font-medium"></small>
+                                                <label for="section_id" class="mb-2.5 block text-black dark:text-white">
+                                                    Section
+                                                </label>                                        
+                                                <select id="section_id" name="section_id" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                                                    @if (count($sections))
+                                                        @foreach ($sections as $section)
+                                                            <option value="{{$section->id}}" >{{$section->name}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="w-full xl:w-1/2">
@@ -139,6 +143,15 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <label for="description" class="mb-2.5 block text-black dark:text-white">
+                                            Description
+                                        </label>
+                                        <textarea rows="2" id="description" name="description" placeholder="Type project description"
+                                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
+                                            <small class="error error-description text-danger text-sm font-medium"></small>
                                     </div>
         
                                     <button class="flex w-full items-center gap-3 justify-center rounded bg-primary p-3 font-medium text-white">

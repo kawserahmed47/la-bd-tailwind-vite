@@ -9,6 +9,7 @@ use App\Models\BasicSettings\Organization;
 use App\Models\BasicSettings\OrganizationDesignation;
 use App\Models\BasicSettings\OrganizationOffice;
 use App\Models\ProjectManagement\Project;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -85,6 +86,7 @@ class ProjectController extends Controller
         $data['ministries'] = Ministry::where('status', true)->orderBy('name', 'asc')->get();
         $data['organizations'] = Organization::where('status', true)->orderBy('name', 'asc')->get();
         $data['divisions'] = Division::orderBy('name', 'asc')->where('status', true)->get();
+        $data['sections'] = Section::orderBy('name', 'asc')->where('status', true)->get();
         return view('backend.pages.project.create', $data);
     }
 
@@ -115,6 +117,7 @@ class ProjectController extends Controller
             $project->organization_id = $request->organization_id;
             $project->ministry_id  = $request->ministry_id ;
             $project->district_id  = $request->district_id ;
+            $project->section_id = $request->section_id;
             $project->description = $request->description;
             $project->status = $request->status;
             $project->created_by = Auth::id();
@@ -137,6 +140,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        $data['sections'] = Section::orderBy('name', 'asc')->where('status', true)->get();
         $data['ministries'] = Ministry::where('status', true)->orderBy('name', 'asc')->get();
         $data['organizations'] = Organization::where('status', true)->orderBy('name', 'asc')->get();
         $data['divisions'] = Division::orderBy('name', 'asc')->where('status', true)->get();
@@ -155,6 +159,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+        $data['sections'] = Section::orderBy('name', 'asc')->where('status', true)->get();
         $data['ministries'] = Ministry::where('status', true)->orderBy('name', 'asc')->get();
         $data['organizations'] = Organization::where('status', true)->orderBy('name', 'asc')->get();
         $data['divisions'] = Division::orderBy('name', 'asc')->where('status', true)->get();
@@ -194,8 +199,9 @@ class ProjectController extends Controller
                 $project->name = $request->name;
                 $project->bn_name = $request->bn_name;
                 $project->organization_id = $request->organization_id;
-                $project->ministry_id  = $request->ministry_id ;
-                $project->district_id  = $request->district_id ;
+                $project->ministry_id  = $request->ministry_id;
+                $project->district_id  = $request->district_id;
+                $project->section_id = $request->section_id;
                 $project->description = $request->description;
                 $project->status = $request->status;
                 $project->updated_by = Auth::id();

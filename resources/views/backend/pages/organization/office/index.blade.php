@@ -107,7 +107,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-download" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-office.download', $organization_office->slug) }}"
+                                                    href="{{ route('admin.download.organization-office', $organization_office->slug) }}"
                                                     target="_blank"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"

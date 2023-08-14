@@ -67,6 +67,8 @@ class MenuSeeder extends Seeder
                 [ 'id' => 18, 'menu_label_id' => 1, 'order_id' => 3, 'parent_id' => 15, 'name'=> 'Organization Designation', 'bn_name' => 'সংস্থার পদবী', 'slug'=> 'organization-designation', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 19, 'menu_label_id' => 1, 'order_id' => 4, 'parent_id' => 15, 'name'=> 'Organization Officer', 'bn_name' => 'সংস্থার কর্মকর্তা', 'slug'=> 'organization-officer', 'icon' => null, 'description'=> null, 'status' => true ],
                 [ 'id' => 20, 'menu_label_id' => 1, 'order_id' => 5, 'parent_id' => 15, 'name'=> 'Ministry', 'bn_name' => 'মন্ত্রণালয়', 'slug'=> 'ministry', 'icon' => null, 'description'=> null, 'status' => true ],
+                [ 'id' => 61, 'menu_label_id' => 1, 'order_id' => 6, 'parent_id' => 15, 'name'=> 'Section', 'bn_name' => 'সেকশন', 'slug'=> 'section', 'icon' => null, 'description'=> null, 'status' => true ],
+                [ 'id' => 62, 'menu_label_id' => 1, 'order_id' => 7, 'parent_id' => 15, 'name'=> 'Section Officer', 'bn_name' => 'সেকশন কর্মকর্তা', 'slug'=> 'section-officer', 'icon' => null, 'description'=> null, 'status' => true ],
 
             [ 'id' => 21, 'menu_label_id' => 1, 'order_id' => 4, 'parent_id' => null,  'name'=> 'Project', 'bn_name' => 'প্রকল্প', 'slug'=> '#', 'icon' => '<svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_130_9801)">

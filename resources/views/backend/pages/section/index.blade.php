@@ -1,4 +1,4 @@
-@extends('backend.master', ['title' => 'Organization Designation List', 'page' => 'organization-designation'])
+@extends('backend.master', ['title' => 'Section List', 'page' => 'section'])
 
 @push('css')
 @endpush
@@ -6,13 +6,13 @@
 @section('content')
     <div class="mx-auto max-w-screen-2xl p-4 md:p-3 2xl:p-5">
         @include('backend.partials.breadcrumb', [
-            'breadcrumb_heading' => 'Organization Designation List',
+            'breadcrumb_heading' => 'Section List',
         
-            'breadcrumb_title' => 'Organization Designation',
-            'breadcrumb_title_url' => route('admin.organization-designation.index'),
+            'breadcrumb_title' => 'Section',
+            'breadcrumb_title_url' => route('admin.section.index'),
         
             'breadcrumb_subtitle' => 'List',
-            'breadcrumb_subtitle_url' => route('admin.organization-designation.index'),
+            'breadcrumb_subtitle_url' => route('admin.section.index'),
         ])
 
         <div class="flex flex-col gap-10">
@@ -21,8 +21,8 @@
                 class="rounded-sm border border-stroke bg-white px-3  pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-5.5 xl:pb-1">
                 <div
                     class="flex flex-col border-b border-[#eee]  sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
-                    <h2 class="text-bold text-lg font-weight-bolder">Latest organization designation list</h2>
-                    <a href="{{ route('admin.organization-designation.create') }}"
+                    <h2 class="text-bold text-lg font-weight-bolder">Latest section list</h2>
+                    <a href="{{ route('admin.section.create') }}"
                         class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
                         <span>
                             <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -34,15 +34,12 @@
                         Create New
                     </a>
                 </div>
-                <div class="relative max-w-full overflow-x-auto pb-5 organization-designation-table-section">
+                <div class="relative max-w-full overflow-x-auto pb-5 section-table-section">
                     <table class="w-full table-auto">
                         <thead>
                             <tr class="bg-gray-2 text-left dark:bg-meta-4">
                                 <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                                     Name
-                                </th>
-                                <th class="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                                    Organization
                                 </th>
                                 <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
                                     Created at
@@ -57,30 +54,27 @@
                         </thead>
                         <tbody>
 
-                            @if (count($organization_designations))
-                                @foreach ($organization_designations as $organization_designation)
+                            @if (count($sections))
+                                @foreach ($sections as $section)
                                     <tr>
                                         <td class="border-b border-[#eee] py-3 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                            <h5 class="font-medium text-black dark:text-white">{{ $organization_designation->name }}
+                                            <h5 class="font-medium text-black dark:text-white">{{ $section->name }}
                                             </h5>
-                                            <p class="text-sm">{{ $organization_designation->bn_name }}</p>
+                                            <p class="text-sm">{{ $section->bn_name }}</p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">{{ $organization_designation->organization->name }} </p>
-                                        </td>
-                                        <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">{{ date('F d, Y', strtotime($organization_designation->updated_at)) }} </p>
+                                            <p class="text-black dark:text-white">{{ date('F d, Y') }} </p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                             <p
-                                                class="inline-flex rounded-full  {{ $organization_designation->status ? 'bg-success text-success' : 'bg-danger text-danger' }}  bg-opacity-10 py-1 px-3 text-sm font-medium">
-                                                {{ $organization_designation->status ? 'Active' : 'Inactive' }}
+                                                class="inline-flex rounded-full  {{ $section->status ? 'bg-success text-success' : 'bg-danger text-danger' }}  bg-opacity-10 py-1 px-3 text-sm font-medium">
+                                                {{ $section->status ? 'Active' : 'Inactive' }}
                                             </p>
                                         </td>
                                         <td class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                             <div class="flex items-center space-x-3.5">
                                                 <a data-tooltip-target="tooltip-edit" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-designation.edit', $organization_designation->id) }}"
+                                                    href="{{ route('admin.section.edit', $section->id) }}"
                                                     class="hover:text-primary">
                                                     <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -92,7 +86,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-show" data-tooltip-placement="top"
-                                                    href="{{ route('admin.organization-designation.show', $organization_designation->id) }}"
+                                                    href="{{ route('admin.section.show', $section->id) }}"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"
                                                         height="18" viewBox="0 0 18 18" fill="none"
@@ -107,7 +101,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-download" data-tooltip-placement="top"
-                                                    href="{{ route('admin.download.organization-designation', $organization_designation->slug) }}"
+                                                    href="{{ route('admin.download.section', $section->slug) }}"
                                                     target="_blank"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"
@@ -122,8 +116,8 @@
                                                     </svg>
                                                 </a>
 
-                                                <form class="organization-designation-delete-form" method="POST"
-                                                    action="{{ route('admin.organization-designation.destroy', $organization_designation->id) }}">
+                                                <form class="section-delete-form" method="POST"
+                                                    action="{{ route('admin.section.destroy', $section->id) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" data-tooltip-target="tooltip-delete"
@@ -154,7 +148,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="4" class="text-danger text-center">No organization designations found!</td>
+                                    <td colspan="4" class="text-danger text-center">No sections found!</td>
                                 </tr>
                             @endif
 
@@ -175,10 +169,10 @@
 @endsection
 @push('js')
     <script type="module">
-    $(document).on('submit', '.organization-designation-delete-form', function(e){
+    $(document).on('submit', '.section-delete-form', function(e){
         e.preventDefault()
         let _this = $(this);
-        let formLoaded = _this.closest('.organization-designation-table-section').find('.form-loaded');
+        let formLoaded = _this.closest('.section-table-section').find('.form-loaded');
 
 
         Swal.fire({

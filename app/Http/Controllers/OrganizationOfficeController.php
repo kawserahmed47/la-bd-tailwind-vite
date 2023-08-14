@@ -190,7 +190,7 @@ class OrganizationOfficeController extends Controller
         $mpdf->debug = true;
         $mpdf->Output('organization.pdf', 'I');
 
-        // return view('backend.pages.organization.download', $data);
+        // return view('backend.pages.download.organization', $data);
  
     
     }

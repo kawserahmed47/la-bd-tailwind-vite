@@ -100,7 +100,7 @@
                                                 </a>
 
                                                 <a data-tooltip-target="tooltip-download" data-tooltip-placement="top"
-                                                    href="{{ route('admin.project.download', $project->slug) }}"
+                                                    href="{{ route('admin.download.project', $project->slug) }}"
                                                     target="_blank"
                                                     class="hover:text-primary">
                                                     <svg class="fill-current text-gray-500 dark:text-white" width="18"
