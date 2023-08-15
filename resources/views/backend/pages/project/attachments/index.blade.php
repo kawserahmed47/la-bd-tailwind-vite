@@ -1,4 +1,4 @@
-@extends('backend.master', ['title' => 'Project Create', 'page' => 'project' ])
+@extends('backend.master', ['title' => 'Project Create', 'page' => 'project'])
 
 @push('css')
 @endpush
@@ -10,222 +10,382 @@
             'breadcrumb_title' => 'Project',
             'breadcrumb_title_url' => route('admin.project.index'),
             'breadcrumb_subtitle' => 'Edit',
-            'breadcrumb_subtitle_url' => route('admin.project.edit', $project->id)
+            'breadcrumb_subtitle_url' => route('admin.project.edit', $project->id),
         ])
-
         <div class="flex flex-col gap-10">
-
             <div class="flex flex-col gap-9">
                 <!-- Contact Form -->
-                <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark px-3 pb-2.5 sm:px-5.5 xl:pb-1">
-                    <div class="flex flex-col border-b border-[#eee] sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
-                        <h2 class="text-bold text-lg font-weight-bolder">Project edit form</h2>
-                        <a href="{{route('admin.project.index')}}" class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
-                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01"/>
-                              </svg>
-                          Show List
+                <div
+                    class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark px-3 pb-2.5 sm:px-5.5 xl:pb-1">
+                    <div
+                        class="flex flex-col border-b border-[#eee] sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
+                        <h2 class="text-bold text-lg font-weight-bolder">{{$project->name}}</h2>
+                        <a href="{{ route('admin.project.index') }}"
+                            class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 17 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01" />
+                            </svg>
+                            Show List
                         </a>
                     </div>
                     <div class="flex flex-row">
                         <!-- Vertical Tab Menu -->
                         <div class="w-1/4">
-                            @include('backend.pages.project.partials.tabs', ['activeTab' => 'attachments'])
+                            @include('backend.pages.project.partials.tabs', [
+                                'activeTab' => 'attachments',
+                            ])
                         </div>
-    
+
                         <!-- Tab Content -->
                         <div class="w-3/4 p-2">
                             <div class="tab-content active-content">
                                 <div
-                                class="w-full pb-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                <ul
-                                    class="flex flex-wrap justify-between text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
-                                    <li class="mr-2">
-                                        <p class="inline-block p-4 rounded-tl-lg  dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500"> Attachment </p>
-                                    </li>
-                                </ul>
-                                <div id="manuLabelTabContent" class="p-5">
-                                    <form id="project-store-form" method="POST" enctype="multipart/form-data" action="{{route('admin.project.update', $project->id)}}">
-                                        @csrf
-                                        @method('put')
-                                        <div class="relative">
-                                            <div class="p-3">
-                                                
-                                                <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="name" class="mb-2.5 block text-black dark:text-white">
-                                                            Name in English
-                                                        </label>
-                                                        <input type="text" id="name" name="name" value="{{$project->name ?? ''}}"  placeholder="Name in English"
-                                                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                                                            <small class="error error-name text-danger text-sm font-medium"></small>
-                    
-                                                    </div>
-                    
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="bn_name" class="mb-2.5 block text-black dark:text-white">
-                                                            Name in Bengali
-                                                        </label>
-                                                        <input type="text" id="bn_name" name="bn_name"  value="{{$project->bn_name ?? ''}}" placeholder="Name in Bengali"
-                                                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                                                            <small class="error error-bn_name text-danger text-sm font-medium"></small>
-                    
-                                                    </div>
-                                                </div>
-            
-                                                <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="organization_id" class="mb-2.5 block text-black dark:text-white">
-                                                            Prospective organization
-                                                        </label>
-            
-                                                        <select id="organization_id" name="organization_id" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                                            <option value="">Select Project</option>
-                                                            @if (count($organizations))
-                                                                @foreach ($organizations as $organization)
-                                                                    <option value="{{$organization->id}}" {{$organization->id == $project->organization_id ? 'selected' : '' }} >{{$organization->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                        <small class="error error-organization_id text-danger text-sm font-medium"></small>
-                    
-                                                    </div>
-                    
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="ministry_id" class="mb-2.5 block text-black dark:text-white">
-                                                            Ministry
-                                                        </label>
-                                                        <select id="ministry_id" name="ministry_id" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                                            <option value="">Select Ministry</option>
-                                                            @if (count($ministries))
-                                                                @foreach ($ministries as $ministry)
-                                                                    <option value="{{$ministry->id}}" {{$ministry->id == $project->ministry_id ? 'selected' : '' }} >{{$ministry->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                        <small class="error error-ministry_id text-danger text-sm font-medium"></small>
-                                                    </div>
-                                                </div>
-            
-                                                <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="division_id" class="mb-2.5 block text-black dark:text-white">
-                                                            Division
-                                                        </label>
-            
-                                                        <select id="division_id" name="division_id" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                                            <option value="">Select Division</option>
-                                                            @if (count($divisions))
-                                                                @foreach ($divisions as $division)
-                                                                    <option value="{{$division->id}}" {{$division->id == $project->district->division_id ? 'selected' : '' }} >{{$division->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                        <small class="error error-division_id text-danger text-sm font-medium"></small>
-                    
-                                                    </div>
-                    
-                                                    <div class="w-full xl:w-1/2">
-                                                        <label for="district_id" class="mb-2.5 block text-black dark:text-white">
-                                                            District
-                                                        </label>
-                                                        <select id="district_id" name="district_id" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                                            <option value="">Select District</option>
-                                                            @if (count($districts))
-                                                                @foreach ($districts as $district)
-                                                                    <option value="{{$district->id}}" {{$district->id == $project->district_id ? 'selected' : ''}} >{{$district->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                        <small class="error error-district_id text-danger text-sm font-medium"></small>
-                                                    </div>
-                                                </div>
-                    
-                                                <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                                    <div class="w-full xl:w-1/2">
-                                                        <div class="mb-6">
-                                                            <label for="description" class="mb-2.5 block text-black dark:text-white">
-                                                                Description
-                                                            </label>
-                                                            <textarea rows="1" id="description" name="description" placeholder="Type project description"
-                                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">{{$project->description}}</textarea>
-                                                                <small class="error error-description text-danger text-sm font-medium"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-full xl:w-1/2">
-                                                        <div class="mb-6">
-                                                            <label for="status" class="mb-2.5 block text-black dark:text-white">
-                                                                Status
-                                                            </label>                                        
-                                                            <select id="status" name="status" required class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                                                                @foreach (projectStatus() as $key=>$status)
-                                                                    <option value="{{$key}}" data-color="{{$status['color']}}" {{$project->status == $key ? 'selected' : '' }} >{{$status['name']}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-            
-            
-                    
-                                                <button class="flex w-full items-center gap-3 justify-center rounded bg-primary p-3 font-medium text-white">
-                                                    <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3m-5.5 0V1.07M5.5 5l4-4 4 4"/>
-                                                    </svg>  
-                                                    Update Project
-                                                </button>
-                                            </div>
-                                            @include('common.action_loader')
-            
-                                        </div>
-                                    </form>
+                                    class="w-full pb-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div
+                                        class="flex flex-col border-b border-[#eee]  sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
+                                        <h2 class="text-bold text-lg font-weight-bolder">Project Attachments</h2>
+                                        <button   type="button"  data-modal-target="project-attachment-modal"  id="add-new-attachment-btn"
+                                            class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
+                                            <span>
+                                                <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                            </span>
+                                            Add New
+                                        </button>
+                                    </div>
+                                    <div class="relative max-w-full overflow-x-auto pb-5 project-finished-table-section">
+                                        <table class="w-full table-auto">
+                                            <thead>
+                                                <tr class="bg-gray-2 text-left dark:bg-meta-4">
+                                                    <th class=" py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                                                        Name
+                                                    </th>
+                                                    <th class=" font-medium text-black dark:text-white">
+                                                        Type
+                                                    </th>
+                                                    <th class=" font-medium text-black dark:text-white">
+                                                        Size
+                                                    </th>
+                                                    <th class=" py-4 px-4 font-medium text-black dark:text-white">
+                                                        Created at
+                                                    </th>
+
+                                                    <th
+                                                        class="max-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @if (count($project->attachments))
+                                                    @foreach ($project->attachments as $attachment)
+                                                   
+                                                    
+                                                        <tr>
+                                                            <td
+                                                                class="border-b border-[#eee] py-3 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                                                <h5 class="font-medium text-black dark:text-white">
+                                                                    {{ $attachment->name  ?? '' }}
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-black dark:text-white">
+                                                                    {{ $attachment->type ?? '.png' }}
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-black dark:text-white">
+                                                                    {{ $attachment->size ?? '2mb' }}
+                                                                </p>
+                                                            </td>
+                                                            <td
+                                                                class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
+                                                                <p class="text-black dark:text-white">
+                                                                    {{ date('F d, Y', strtotime($attachment->updated_at)) }}
+                                                                </p>
+                                                            </td>
+
+                                                            <td
+                                                                class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
+                                                                <div class="flex items-center space-x-3.5">
+                                                                    <a data-tooltip-target="tooltip-edit"
+                                                                        data-tooltip-placement="top"
+                                                                        href="#"
+                                                                        class="hover:text-primary">
+                                                                        <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white"
+                                                                            aria-hidden="true"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 20 20">
+                                                                            <path stroke="currentColor"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="1.5"
+                                                                                d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
+                                                                        </svg>
+                                                                    </a>
+
+                                                                    <a data-tooltip-target="tooltip-show" target="_blank" data-tooltip-placement="top"
+                                                                    href="{{ asset($attachment->file_path) }}"
+                                                                    class="hover:text-primary">
+                                                                    <svg class="fill-current text-gray-500 dark:text-white" width="18"
+                                                                        height="18" viewBox="0 0 18 18" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z"
+                                                                            fill="" />
+                                                                        <path
+                                                                            d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z"
+                                                                            fill="" />
+                                                                    </svg>
+                                                                </a>
+
+
+
+                                                                    <form class="project-finished-delete-form"
+                                                                        method="POST"
+                                                                        action="#">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button type="button"
+                                                                            data-tooltip-target="tooltip-delete"
+                                                                            data-tooltip-placement="top"
+                                                                            class="hover:text-primary">
+                                                                            <svg class="fill-current text-gray-500 dark:text-white"
+                                                                                width="18" height="18"
+                                                                                viewBox="0 0 18 18" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M13.7535 2.47502H11.5879V1.9969C11.5879 1.15315 10.9129 0.478149 10.0691 0.478149H7.90352C7.05977 0.478149 6.38477 1.15315 6.38477 1.9969V2.47502H4.21914C3.40352 2.47502 2.72852 3.15002 2.72852 3.96565V4.8094C2.72852 5.42815 3.09414 5.9344 3.62852 6.1594L4.07852 15.4688C4.13477 16.6219 5.09102 17.5219 6.24414 17.5219H11.7004C12.8535 17.5219 13.8098 16.6219 13.866 15.4688L14.3441 6.13127C14.8785 5.90627 15.2441 5.3719 15.2441 4.78127V3.93752C15.2441 3.15002 14.5691 2.47502 13.7535 2.47502ZM7.67852 1.9969C7.67852 1.85627 7.79102 1.74377 7.93164 1.74377H10.0973C10.2379 1.74377 10.3504 1.85627 10.3504 1.9969V2.47502H7.70664V1.9969H7.67852ZM4.02227 3.96565C4.02227 3.85315 4.10664 3.74065 4.24727 3.74065H13.7535C13.866 3.74065 13.9785 3.82502 13.9785 3.96565V4.8094C13.9785 4.9219 13.8941 5.0344 13.7535 5.0344H4.24727C4.13477 5.0344 4.02227 4.95002 4.02227 4.8094V3.96565ZM11.7285 16.2563H6.27227C5.79414 16.2563 5.40039 15.8906 5.37227 15.3844L4.95039 6.2719H13.0785L12.6566 15.3844C12.6004 15.8625 12.2066 16.2563 11.7285 16.2563Z"
+                                                                                    fill="" />
+                                                                                <path
+                                                                                    d="M9.00039 9.11255C8.66289 9.11255 8.35352 9.3938 8.35352 9.75942V13.3313C8.35352 13.6688 8.63477 13.9782 9.00039 13.9782C9.33789 13.9782 9.64727 13.6969 9.64727 13.3313V9.75942C9.64727 9.3938 9.33789 9.11255 9.00039 9.11255Z"
+                                                                                    fill="" />
+                                                                                <path
+                                                                                    d="M11.2502 9.67504C10.8846 9.64692 10.6033 9.90004 10.5752 10.2657L10.4064 12.7407C10.3783 13.0782 10.6314 13.3875 10.9971 13.4157C11.0252 13.4157 11.0252 13.4157 11.0533 13.4157C11.3908 13.4157 11.6721 13.1625 11.6721 12.825L11.8408 10.35C11.8408 9.98442 11.5877 9.70317 11.2502 9.67504Z"
+                                                                                    fill="" />
+                                                                                <path
+                                                                                    d="M6.72245 9.67504C6.38495 9.70317 6.1037 10.0125 6.13182 10.35L6.3287 12.825C6.35683 13.1625 6.63808 13.4157 6.94745 13.4157C6.97558 13.4157 6.97558 13.4157 7.0037 13.4157C7.3412 13.3875 7.62245 13.0782 7.59433 12.7407L7.39745 10.2657C7.39745 9.90004 7.08808 9.64692 6.72245 9.67504Z"
+                                                                                    fill="" />
+                                                                            </svg>
+                                                                        </button>
+                                                                    </form>
+
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="5" class="text-danger text-center">No Attachments Found!</td>
+                                                    </tr>
+                                                @endif
+
+
+                                            </tbody>
+                                        </table>
+                                        @include('common.action_loader')
+                                    </div>
                                 </div>
-                                </div>
-                                
                             </div>
                         </div>
-                    </div>    
-
-
-
-
-                        
-                       
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
+    @include('common.tooltip', ['tooltipName' => 'tooltip-edit', 'tooltipTitle' => 'Edit'])
+    @include('common.tooltip', ['tooltipName' => 'tooltip-show', 'tooltipTitle' => 'Show'])
+    @include('common.tooltip', ['tooltipName' => 'tooltip-delete', 'tooltipTitle' => 'Delete'])
+
+  
+    @include('backend.pages.project.attachments.modals.add_new_attachment_modal')
+
+    
+
+
 @endsection
 
 @push('js')
-<script type="module">
-    $(document).on('submit', '#project-store-form', function(e){
-        e.preventDefault();
-        let _this = $(this);
-        $.ajax({
-            type: "put",
-            url: _this.attr('action'),
-            data: _this.serialize(),
-            beforeSend: function() {
-                _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
-                _this.find('.error').html('');
-            },
-            success: function (response) {
-                _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-                Toast.fire({icon: 'success', text: response.message});
-                location.href = "{{route('admin.project.current')}}";
-            },
-            error: function (xhr) {
-                _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-                var responseText = $.parseJSON(xhr.responseText);
-                Toast.fire({icon: 'error', text: responseText.message});
-                if (responseText.errors.length) {
-                    $.each(responseText.errors, function (indexInArray, valueOfElement) { 
-                         $('.error-'+indexInArray).html(valueOfElement[0]);
+
+    <script type="module">
+        const _this_modal_element = document.getElementById('project-attachment-modal');
+        const modal = new Modal(_this_modal_element);
+
+        $(document).on('submit', '#project-store-form', function(e) {
+            e.preventDefault();
+            let _this = $(this);
+            $.ajax({
+                type: "put",
+                url: _this.attr('action'),
+                data: _this.serialize(),
+                beforeSend: function() {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
+                    _this.find('.error').html('');
+                },
+                success: function(response) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                    Toast.fire({
+                        icon: 'success',
+                        text: response.message
                     });
+                    location.href = "{{ route('admin.project.current') }}";
+                },
+                error: function(xhr) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                    var responseText = $.parseJSON(xhr.responseText);
+                    Toast.fire({
+                        icon: 'error',
+                        text: responseText.message
+                    });
+                    if (responseText.errors.length) {
+                        $.each(responseText.errors, function(indexInArray, valueOfElement) {
+                            $('.error-' + indexInArray).html(valueOfElement[0]);
+                        });
+                    }
                 }
+            });
+        })
+
+        $(document).on('click', '#add-new-attachment-btn', function(e){
+            e.preventDefault();
+            modal.show();
+        })
+
+        $(document).on('click', '.close-modal', function(e){
+            e.preventDefault();
+            modal.hide();
+        })
+
+        $(document).on('change', '#organization_office_id, #organization_designation_id', function(e){
+            e.preventDefault();
+            let _this = $(this).closest('form');
+            let _this_office_id = $("#organization_office_id").val();
+            let _this_designation_id = $("#organization_designation_id").val();
+
+            if(_this_office_id && _this_designation_id){
+                $.ajax({
+                type: "get",
+                url: "{{route('admin.organization-officer.options')}}",
+                data:{
+                    "organization_office_id" : _this_office_id,
+                    "organization_designation_id" :_this_designation_id
+                },
+                beforeSend: function(){
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
+
+                },
+                success: function (response) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+
+                    Toast.fire({icon: 'success', text: response.message});
+                    $("#organization_officer_id").html(response.html);
+                }, 
+                error: function (xhr) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+
+                    var responseText = $.parseJSON(xhr.responseText);
+                    Toast.fire({icon: 'error', text: responseText.message});
+                }
+            });
             }
+
+           
+
+
+        })
+
+        $(document).on('submit', '#project-organization-officer-store-form, #project-attachment-form', function(e){
+            e.preventDefault();
+            let _this = $(this);
+            $.ajax({
+                type: "post",
+                url: _this.attr('action'),
+                data: _this.serialize(),
+                beforeSend: function() {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
+                    _this.find('.error').html('');
+                },
+                success: function(response) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                    Toast.fire({
+                        icon: 'success',
+                        text: response.message
+                    });
+                    location.reload();
+                },
+                error: function(xhr) {
+                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
+                    var responseText = $.parseJSON(xhr.responseText);
+                    Toast.fire({
+                        icon: 'error',
+                        text: responseText.message
+                    });
+                    if (responseText.errors.length) {
+                        $.each(responseText.errors, function(indexInArray, valueOfElement) {
+                            $('.error-' + indexInArray).html(valueOfElement[0]);
+                        });
+                    }
+                }
+            });
+
+        })
+
+
+        var uploadedDocumentMap = {}
+        var myDropzone = new Dropzone("#fileUpload", {
+            url: "{{route('admin.project.attachment.upload')}}", // Set the url for your upload script location
+            paramName: "file", // The name that will be used to transfer the file
+            // maxFiles: 10,
+            maxFilesize: 5, // MB
+            addRemoveLinks: true,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+            // autoProcessQueue: false,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function (file, response) {
+                console.log("success_name", response.name);
+
+                $('#fileUpload').append('<input type="hidden" name="file_path" value="' + response.name + '">')
+                uploadedDocumentMap[file.name] = response.name
+            },
+            removedfile: function (file) {
+                console.log("file", file);
+                file.previewElement.remove()
+                var name = ''
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name
+                } else {
+                    name = uploadedDocumentMap[file.name]
+                }
+
+                if(name){
+                    console.log("remove_name", name);
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{route("admin.project.attachment.remove")}}',
+                        data: {
+                            _token : "{{csrf_token()}}",
+                            file_name: name
+                        },
+                        sucess: function(response){
+                            console.log('remove_name_success: ' + response.message);
+                        }
+                    });
+                    $('#fileUpload').closest('form').find('input[name="attachments[]"][value="' + name + '"]').remove()
+                }
+            },
         });
-    })
-</script>
+
+      
+    </script>
 @endpush

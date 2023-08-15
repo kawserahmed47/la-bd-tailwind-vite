@@ -47,7 +47,6 @@
                                     <div
                                         class="flex flex-col border-b border-[#eee]  sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
                                         <h2 class="text-bold text-lg font-weight-bolder">Organization Officer</h2>
-                                        {{-- data-modal-toggle="add-new-organization-officer-modal" --}}
                                         <button   type="button"  data-modal-target="add-new-organization-officer-modal"  id="add-new-organization-officer-btn"
                                             class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
                                             <span>
@@ -188,7 +187,6 @@
     @include('common.tooltip', ['tooltipName' => 'tooltip-delete', 'tooltipTitle' => 'Delete'])
 
     @include('backend.pages.project.organization_officers.modals.add_new_officer_modal')
-    {{-- @include('backend.pages.project.organization_officers.modals.edit_officer_modal') --}}
 
 
 

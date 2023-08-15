@@ -73,5 +73,10 @@ class Project extends Model
         return $this->hasMany(ProjectOrganizationOfficer::class, 'project_id', 'id');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(ProjectAttachment::class, 'project_id', 'id');
+    }
+
 
 }

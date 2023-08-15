@@ -55,7 +55,8 @@ class ProjectController extends Controller
         return view('backend.pages.project.pending', $data);
     }
 
-    public function officers($id){
+    public function officers($id)
+    {
         $project = Project::with(['organization_officers' => function($q1){
             $q1->with(['officer' => function($q2){
                 $q2->with('office', 'designation', 'user');
@@ -69,6 +70,15 @@ class ProjectController extends Controller
         // return response()->json($data, 200);
         return view('backend.pages.project.organization_officers.index', $data);
     }
+
+    public function attachments($id)
+    {
+        $project = Project::with('attachments')->find($id);
+        $data['project'] = $project;
+        return view('backend.pages.project.attachments.index', $data);
+    }
+
+ 
 
     /**
      * Display a listing of the resource.

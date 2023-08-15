@@ -1,9 +1,26 @@
  /* Custom styles for the active and hidden tabs */
  .tab-btn.active-tab {
-    background-color: #4b5563;
-    color: #ffffff;
-}
+     background-color: #4b5563;
+     color: #ffffff;
+ }
 
-.tab-content.hidden-content {
-    display: none;
-}
+ .tab-content.hidden-content {
+     display: none;
+ }
+
+ .dz-started .dz-success-mark,
+ .dz-started .dz-error-mark {
+     display: none;
+ }
+
+ .dz-started .dz-default {
+     display: none;
+ }
+
+ .dz-started .dz-preview {
+     text-align: center;
+ }
+
+ .dz-started .dz-preview img {
+     display: unset;
+ }

@@ -5,7 +5,9 @@ import persist from '@alpinejs/persist'
 import Swal from 'sweetalert2'
 import 'flowbite';
 import { Modal } from 'flowbite';
+import Dropzone from "dropzone"
 
+window.Dropzone = Dropzone
 // jquery
 window.$ = $;
 
@@ -28,3 +30,5 @@ const Toast = Swal.mixin({
     }
   })
   window.Toast = Toast;
+
+ 

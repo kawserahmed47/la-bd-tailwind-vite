@@ -39,12 +39,14 @@
       <!-- ===== Main Content Start ===== -->
       <main >
           @yield('content')
+        
       </main>
       <!-- ===== Main Content End ===== -->
     </div>
     <!-- ===== Content Area End ===== -->
   </div>
   <!-- ===== Page Wrapper End ===== -->
+ 
 
   @stack('js')
 </body>

@@ -10,6 +10,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OrganizationDesignationController;
 use App\Http\Controllers\OrganizationOfficeController;
 use App\Http\Controllers\OrganizationOfficerController;
+use App\Http\Controllers\ProjectAttachmentController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectOrganizationOfficerController;
 use App\Http\Controllers\SectionController;
@@ -44,6 +45,7 @@ Route::resources([
     'organization-designation' => OrganizationDesignationController::class,
     'organization-officer' => OrganizationOfficerController::class,
     'project-organization-officer' => ProjectOrganizationOfficerController::class,
+    'project-attachment' => ProjectAttachmentController::class,
     'project' => ProjectController::class, 
     'ministry' => MinistryController::class,
     'menu-label' => MenuLabelController::class,
@@ -55,6 +57,10 @@ Route::get('project-finished', [ProjectController::class, 'finished'])->name('pr
 Route::get('project-pending', [ProjectController::class, 'pending'])->name('project.pending');
 Route::get('project-officers/{id}',[ProjectController::class, 'officers'])->name('project.officers');
 Route::get('project-attachments/{id}',[ProjectController::class, 'attachments'])->name('project.attachments');
+
+Route::post('project-attachment-upload',[ProjectAttachmentController::class, 'upload'])->name('project.attachment.upload');
+Route::post('project-attachment-remove',[ProjectAttachmentController::class, 'remove'])->name('project.attachment.remove');
+
 
 Route::get('organization-office-and-designation-options', [OrganizationController::class, 'officeAndDesignationOptions'])->name('organization.office.designation.options');
 
