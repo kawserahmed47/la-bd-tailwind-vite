@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use SebastianBergmann\Type\TrueType;
 
 class ProjectAttachmentController extends Controller
 {
@@ -46,22 +47,42 @@ class ProjectAttachmentController extends Controller
             return response()->json($data, 400);
         }
 
-        try {
+        if($request->id){
+            $attachment =  ProjectAttachment::find($request->id);
+            if($attachment->file_path != $request->file_path){
+                try {
+                    unlink($attachment->file_path);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+            }
+
+        } else {
             $attachment = new ProjectAttachment();
+            $attachment->created_by = Auth::id();
+        }
+
+        
+
+       
+
+
+        try {
+           
             $attachment->project_id = $request->project_id;
             $attachment->name = $request->name;
             $attachment->file_path = $request->file_path;
             $attachment->description = $request->description;
             $attachment->status = $request->status ?? false;
-            $attachment->created_by = Auth::id();
             $attachment->updated_by = Auth::id();
+
             $attachment->save();
             $data['status'] = true;
-            $data['message'] = "Attachment added successfully!";
+            $data['message'] = "Attachment saved successfully!";
             return response()->json($data, 200);
         } catch (\Throwable $th) {
             $data['status'] = false;
-            $data['message'] = "Failed to add the attachment!";
+            $data['message'] = "Failed to save the attachment!";
             $data['errors'] = $th;
             return response()->json($data, 500);
         }
@@ -122,8 +143,39 @@ class ProjectAttachmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectAttachment $projectAttachment)
+    public function destroy($id)
     {
-        //
+        $attachment = ProjectAttachment::find($id);
+        if($attachment){
+            if($attachment->file_path){
+                try {
+                    unlink($attachment->file_path);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+            }
+
+            if($attachment->delete()){
+                $data['status'] = true;
+                $data['message'] = "Attachment deleted successfully!";
+                return response()->json($data, 200);
+            } else {
+                $data['status'] = false;
+                $data['message'] = "Failed to delete!";
+                return response()->json($data, 500);
+            }
+
+
+        } else {
+            $data['status'] = false;
+            $data['message'] = "Nothing found to delete!";
+            return response()->json($data, 404);
+        }
+
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

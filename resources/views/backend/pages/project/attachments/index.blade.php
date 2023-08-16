@@ -1,4 +1,4 @@
-@extends('backend.master', ['title' => 'Project Create', 'page' => 'project'])
+@extends('backend.master', ['title' => 'Project Create', 'page' => 'project-current'])
 
 @push('css')
 @endpush
@@ -19,7 +19,7 @@
                     class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark px-3 pb-2.5 sm:px-5.5 xl:pb-1">
                     <div
                         class="flex flex-col border-b border-[#eee] sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
-                        <h2 class="text-bold text-lg font-weight-bolder">{{$project->name}}</h2>
+                        <h2 class="text-bold text-lg font-weight-bolder">{{ $project->name }}</h2>
                         <a href="{{ route('admin.project.index') }}"
                             class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
                             <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,8 @@
                                     <div
                                         class="flex flex-col border-b border-[#eee]  sm:flex-row sm:items-center sm:justify-between gap-3  py-4 px-4 md:px-6 xl:px-7.5">
                                         <h2 class="text-bold text-lg font-weight-bolder">Project Attachments</h2>
-                                        <button   type="button"  data-modal-target="project-attachment-modal"  id="add-new-attachment-btn"
+                                        <button type="button" data-modal-target="project-attachment-modal"
+                                            id="add-new-attachment-btn"
                                             class="inline-flex  items-center justify-center gap-2.5 rounded-full bg-primary py-2 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-4 xl:px-5">
                                             <span>
                                                 <svg class="w-6 h-6 text-white" aria-hidden="true"
@@ -60,7 +61,7 @@
                                             Add New
                                         </button>
                                     </div>
-                                    <div class="relative max-w-full overflow-x-auto pb-5 project-finished-table-section">
+                                    <div class="relative max-w-full overflow-x-auto pb-5 project-attachment-table-section">
                                         <table class="w-full table-auto">
                                             <thead>
                                                 <tr class="bg-gray-2 text-left dark:bg-meta-4">
@@ -68,10 +69,10 @@
                                                         Name
                                                     </th>
                                                     <th class=" font-medium text-black dark:text-white">
-                                                        Type
+                                                        Description
                                                     </th>
                                                     <th class=" font-medium text-black dark:text-white">
-                                                        Size
+                                                        Created By
                                                     </th>
                                                     <th class=" py-4 px-4 font-medium text-black dark:text-white">
                                                         Created at
@@ -87,23 +88,23 @@
 
                                                 @if (count($project->attachments))
                                                     @foreach ($project->attachments as $attachment)
-                                                   
-                                                    
                                                         <tr>
                                                             <td
                                                                 class="border-b border-[#eee] py-3 px-4 pl-9 dark:border-strokedark xl:pl-11">
                                                                 <h5 class="font-medium text-black dark:text-white">
-                                                                    {{ $attachment->name  ?? '' }}
+                                                                    {{ $attachment->name ?? '' }}
                                                                 </h5>
                                                             </td>
-                                                            <td>
+                                                            <td
+                                                                class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                                                 <p class="text-black dark:text-white">
-                                                                    {{ $attachment->type ?? '.png' }}
+                                                                    {{ $attachment->description ?? '' }}
                                                                 </p>
                                                             </td>
-                                                            <td>
+                                                            <td
+                                                                class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                                                 <p class="text-black dark:text-white">
-                                                                    {{ $attachment->size ?? '2mb' }}
+                                                                    {{ $attachment->updatedBy->name ?? '' }}
                                                                 </p>
                                                             </td>
                                                             <td
@@ -116,10 +117,16 @@
                                                             <td
                                                                 class="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
                                                                 <div class="flex items-center space-x-3.5">
-                                                                    <a data-tooltip-target="tooltip-edit"
+                                                                    <button type="button"
+
+                                                                        data-id="{{$attachment->id}}"
+                                                                        data-name="{{$attachment->name}}"
+                                                                        data-description="{{$attachment->description}}"
+                                                                        data-path="{{$attachment->file_path}}"
+
+                                                                        data-tooltip-target="tooltip-edit"
                                                                         data-tooltip-placement="top"
-                                                                        href="#"
-                                                                        class="hover:text-primary">
+                                                                        class="hover:text-primary project-attachment-edit-btn">
                                                                         <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white"
                                                                             aria-hidden="true"
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -129,31 +136,33 @@
                                                                                 stroke-linejoin="round" stroke-width="1.5"
                                                                                 d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                                                         </svg>
+                                                                    </button>
+
+                                                                    <a data-tooltip-target="tooltip-show" target="_blank"
+                                                                        data-tooltip-placement="top"
+                                                                        href="{{ asset($attachment->file_path) }}"
+                                                                        class="hover:text-primary">
+                                                                        <svg class="fill-current text-gray-500 dark:text-white"
+                                                                            width="18" height="18"
+                                                                            viewBox="0 0 18 18" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z"
+                                                                                fill="" />
+                                                                            <path
+                                                                                d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z"
+                                                                                fill="" />
+                                                                        </svg>
                                                                     </a>
 
-                                                                    <a data-tooltip-target="tooltip-show" target="_blank" data-tooltip-placement="top"
-                                                                    href="{{ asset($attachment->file_path) }}"
-                                                                    class="hover:text-primary">
-                                                                    <svg class="fill-current text-gray-500 dark:text-white" width="18"
-                                                                        height="18" viewBox="0 0 18 18" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z"
-                                                                            fill="" />
-                                                                        <path
-                                                                            d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z"
-                                                                            fill="" />
-                                                                    </svg>
-                                                                </a>
 
 
-
-                                                                    <form class="project-finished-delete-form"
+                                                                    <form class="project-attachment-delete-form"
                                                                         method="POST"
-                                                                        action="#">
+                                                                        action="{{ route('admin.project-attachment.destroy', $attachment->id) }}">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button type="button"
+                                                                        <button type="submit"
                                                                             data-tooltip-target="tooltip-delete"
                                                                             data-tooltip-placement="top"
                                                                             class="hover:text-primary">
@@ -184,7 +193,8 @@
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="5" class="text-danger text-center">No Attachments Found!</td>
+                                                        <td colspan="5" class="text-danger text-center">No Attachments
+                                                            Found!</td>
                                                     </tr>
                                                 @endif
 
@@ -206,104 +216,50 @@
     @include('common.tooltip', ['tooltipName' => 'tooltip-show', 'tooltipTitle' => 'Show'])
     @include('common.tooltip', ['tooltipName' => 'tooltip-delete', 'tooltipTitle' => 'Delete'])
 
-  
+
     @include('backend.pages.project.attachments.modals.add_new_attachment_modal')
 
-    
+
 
 
 @endsection
 
 @push('js')
-
     <script type="module">
         const _this_modal_element = document.getElementById('project-attachment-modal');
         const modal = new Modal(_this_modal_element);
 
-        $(document).on('submit', '#project-store-form', function(e) {
-            e.preventDefault();
-            let _this = $(this);
-            $.ajax({
-                type: "put",
-                url: _this.attr('action'),
-                data: _this.serialize(),
-                beforeSend: function() {
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
-                    _this.find('.error').html('');
-                },
-                success: function(response) {
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-                    Toast.fire({
-                        icon: 'success',
-                        text: response.message
-                    });
-                    location.href = "{{ route('admin.project.current') }}";
-                },
-                error: function(xhr) {
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-                    var responseText = $.parseJSON(xhr.responseText);
-                    Toast.fire({
-                        icon: 'error',
-                        text: responseText.message
-                    });
-                    if (responseText.errors.length) {
-                        $.each(responseText.errors, function(indexInArray, valueOfElement) {
-                            $('.error-' + indexInArray).html(valueOfElement[0]);
-                        });
-                    }
-                }
-            });
-        })
 
-        $(document).on('click', '#add-new-attachment-btn', function(e){
+
+        $(document).on('click', '#add-new-attachment-btn', function(e) {
             e.preventDefault();
+            let _this_form = $('#project-attachment-form');
+            _this_form.find('.id').val('');
+            _this_form.find('#file_path').val('');
+            _this_form.trigger("reset");
+
             modal.show();
         })
 
-        $(document).on('click', '.close-modal', function(e){
+        $(document).on('click', '.project-attachment-edit-btn', function(e){
+            e.preventDefault();
+            let _this = $(this);
+            let _this_form = $('#project-attachment-form');
+            _this_form.trigger("reset");
+            _this_form.find('#name').val(_this.attr('data-name'));
+            _this_form.find('#description').val(_this.attr('data-description'));
+            _this_form.find('.id').val(_this.attr('data-id'));
+            _this_form.find('#file_path').val(_this.attr('data-path'));
+
+            modal.show();
+        })
+
+        $(document).on('click', '.close-modal', function(e) {
             e.preventDefault();
             modal.hide();
         })
 
-        $(document).on('change', '#organization_office_id, #organization_designation_id', function(e){
-            e.preventDefault();
-            let _this = $(this).closest('form');
-            let _this_office_id = $("#organization_office_id").val();
-            let _this_designation_id = $("#organization_designation_id").val();
-
-            if(_this_office_id && _this_designation_id){
-                $.ajax({
-                type: "get",
-                url: "{{route('admin.organization-officer.options')}}",
-                data:{
-                    "organization_office_id" : _this_office_id,
-                    "organization_designation_id" :_this_designation_id
-                },
-                beforeSend: function(){
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('flex');
-
-                },
-                success: function (response) {
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-
-                    Toast.fire({icon: 'success', text: response.message});
-                    $("#organization_officer_id").html(response.html);
-                }, 
-                error: function (xhr) {
-                    _this.find('.form-loaded').removeClass('hidden flex').addClass('hidden');
-
-                    var responseText = $.parseJSON(xhr.responseText);
-                    Toast.fire({icon: 'error', text: responseText.message});
-                }
-            });
-            }
-
-           
-
-
-        })
-
-        $(document).on('submit', '#project-organization-officer-store-form, #project-attachment-form', function(e){
+        $(document).on('submit', '#project-organization-officer-store-form, #project-attachment-form', function(e) {
             e.preventDefault();
             let _this = $(this);
             $.ajax({
@@ -339,10 +295,50 @@
 
         })
 
+        $(document).on('submit', '.project-attachment-delete-form', function(e) {
+            e.preventDefault()
+            let _this = $(this);
+            let formLoaded = _this.closest('.project-attachment-table-section').find('.form-loaded');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: _this.attr('method'),
+                        url: _this.attr('action'),
+                        data: _this.serialize(),
+                        beforeSend: function() {
+                            formLoaded.removeClass('hidden flex').addClass('flex');
+                        },
+                        success: function(response) {
+                            _this.closest('tr').remove();
+                            Toast.fire({icon: 'success', text: response.message});
+                            formLoaded.removeClass('hidden flex').addClass('hidden');
+                        },
+                        error: function(xhr) {
+                            formLoaded.removeClass('hidden flex').addClass('hidden');
+                            var responseText = $.parseJSON(xhr.responseText);
+                            Toast.fire({icon: 'error', text: responseText.message});
+                        }
+                    });
+
+
+                }
+            })
+
+
+        })
+
 
         var uploadedDocumentMap = {}
         var myDropzone = new Dropzone("#fileUpload", {
-            url: "{{route('admin.project.attachment.upload')}}", // Set the url for your upload script location
+            url: "{{ route('admin.project.attachment.upload') }}", // Set the url for your upload script location
             paramName: "file", // The name that will be used to transfer the file
             // maxFiles: 10,
             maxFilesize: 5, // MB
@@ -352,13 +348,12 @@
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
-            success: function (file, response) {
+            success: function(file, response) {
                 console.log("success_name", response.name);
-
-                $('#fileUpload').append('<input type="hidden" name="file_path" value="' + response.name + '">')
+                $('#file_path').val(response.name)
                 uploadedDocumentMap[file.name] = response.name
             },
-            removedfile: function (file) {
+            removedfile: function(file) {
                 console.log("file", file);
                 file.previewElement.remove()
                 var name = ''
@@ -368,24 +363,23 @@
                     name = uploadedDocumentMap[file.name]
                 }
 
-                if(name){
+                if (name) {
                     console.log("remove_name", name);
                     $.ajax({
                         type: 'POST',
-                        url: '{{route("admin.project.attachment.remove")}}',
+                        url: '{{ route('admin.project.attachment.remove') }}',
                         data: {
-                            _token : "{{csrf_token()}}",
+                            _token: "{{ csrf_token() }}",
                             file_name: name
                         },
-                        sucess: function(response){
+                        sucess: function(response) {
                             console.log('remove_name_success: ' + response.message);
                         }
                     });
-                    $('#fileUpload').closest('form').find('input[name="attachments[]"][value="' + name + '"]').remove()
+                    $('#fileUpload').closest('form').find('input[name="attachments[]"][value="' + name + '"]')
+                        .remove()
                 }
             },
         });
-
-      
     </script>
 @endpush

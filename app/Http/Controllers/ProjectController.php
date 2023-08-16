@@ -73,7 +73,9 @@ class ProjectController extends Controller
 
     public function attachments($id)
     {
-        $project = Project::with('attachments')->find($id);
+        $project = Project::with(['attachments' => function($q1){
+            $q1->with('createdBy', 'updatedBy');
+        }])->find($id);
         $data['project'] = $project;
         return view('backend.pages.project.attachments.index', $data);
     }

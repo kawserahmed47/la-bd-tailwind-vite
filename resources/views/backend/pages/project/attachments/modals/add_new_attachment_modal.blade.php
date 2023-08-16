@@ -29,8 +29,11 @@
                 <form id="project-attachment-form" method="POST" enctype="multipart/form-data"
                     action="{{ route('admin.project-attachment.store') }}">
                     @csrf
+                    
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
                     <input type="hidden" class="id" name="id" value="">
+                    <input type="hidden" id="file_path" name="file_path" value="">
+
                     <div class="relative">
                         <div class="p-3">
                             <div class="mb-6">
@@ -68,7 +71,7 @@
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 dz-button"><span
                                                     class="font-semibold">Click to upload</span> or drag and drop</p>
                                             <p class="text-xs text-gray-500 dark:text-gray-400 dz-button">SVG, PNG, JPG or GIF
-                                                (MAX. 800x400px)</p>
+                                                (MAX. 2MB)</p>
                                             </div>
                                             
                                         </div>
