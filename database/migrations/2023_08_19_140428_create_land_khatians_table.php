@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_cases', function (Blueprint $table) {
+        Schema::create('land_khatians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
-            $table->string('case_number');
-            $table->text('description')->nullable();
-            $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
+            $table->foreignId('mouza_id')->constrained('mouzas')->onDelete('cascade');
+            $table->string('khatian_number');
+            $table->string('total_land_quantity')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_cases');
+        Schema::dropIfExists('land_khatians');
     }
 };

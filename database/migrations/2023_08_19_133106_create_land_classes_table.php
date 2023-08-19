@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surveys', function (Blueprint $table) {
+        Schema::create('land_classes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id')->default(0);
             $table->string('name');
             $table->string('bn_name');
             $table->string('slug');
+            $table->string('icon')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
+            $table->bigInteger('order_id');
+            $table->foreignId('parent_id')->constrained('land_classes')->onDelete('cascade')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surveys');
+        Schema::dropIfExists('land_classes');
     }
 };

@@ -15,7 +15,8 @@ class SurveySeeder extends Seeder
     {
         $data = [
             [
-                'id' => 1,  
+                'id' => 1, 
+                'order_id' => 1, 
                 'name' => 'BS', 
                 'bn_name' => 'বি এস', 
                 'slug'=> 'bs', 
@@ -24,6 +25,7 @@ class SurveySeeder extends Seeder
             ], 
             [   
                 'id' => 2, 
+                'order_id' => 2, 
                 'name' => 'CS', 
                 'bn_name' => 'সি এস', 
                 'slug'=> 'cs', 
@@ -31,7 +33,8 @@ class SurveySeeder extends Seeder
                 'status' => true
             ], 
             [
-                'id' => 3, 
+                'id' => 3,
+                'order_id' => 3,  
                 'name' => 'BRS', 
                 'bn_name' => 'বি আর এস', 
                 'slug'=> 'brs', 
@@ -39,7 +42,8 @@ class SurveySeeder extends Seeder
                 'status' => true
             ], 
             [   
-                'id' => 4, 
+                'id' => 4,
+                'order_id' => 4,  
                 'name' => 'RS', 
                 'bn_name' => 'আর এস', 
                 'slug'=> 'rs', 
@@ -47,7 +51,8 @@ class SurveySeeder extends Seeder
                 'status' => true
             ], 
             [
-                'id' => 5, 
+                'id' => 5,
+                'order_id' => 5,  
                 'name' => 'SA', 
                 'bn_name' => 'এস এ', 
                 'slug'=> 'sa', 
@@ -55,7 +60,8 @@ class SurveySeeder extends Seeder
                 'status' => true
             ], 
             [
-                'id' => 6, 
+                'id' => 6,
+                'order_id' => 6, 
                 'name' => 'Peti', 
                 'bn_name' => 'পেটি', 
                 'slug'=> 'peti', 
@@ -64,9 +70,19 @@ class SurveySeeder extends Seeder
             ], 
             [   
                 'id' => 7,
+                'order_id' => 7, 
                 'name' => 'Diara',
                 'bn_name' => 'দিয়ারা', 
                 'slug'=> 'diara', 
+                'description' => '', 
+                'status' => true
+            ], 
+            [   
+                'id' => 8,
+                'order_id' => 8, 
+                'name' => 'Namjari',
+                'bn_name' => 'নামজারি', 
+                'slug'=> 'namjari', 
                 'description' => '', 
                 'status' => true
             ], 
