@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\BasicSettings\District;
 use App\Models\BasicSettings\Division;
+use App\Models\BasicSettings\LandClass;
 use App\Models\BasicSettings\Ministry;
 use App\Models\BasicSettings\Organization;
 use App\Models\BasicSettings\OrganizationDesignation;
 use App\Models\BasicSettings\OrganizationOffice;
+use App\Models\BasicSettings\Survey;
+use App\Models\BasicSettings\Thana;
+use App\Models\Land\LandKhatianOwner;
+use App\Models\Land\ProjectLandOwner;
 use App\Models\ProjectManagement\Project;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Mpdf\Mpdf;
 
@@ -78,6 +84,17 @@ class ProjectController extends Controller
         }])->find($id);
         $data['project'] = $project;
         return view('backend.pages.project.attachments.index', $data);
+    }
+
+    public function ownership($id)
+    {
+        $project = Project::find($id);
+        $data['project'] = $project;
+        $data['thanas'] = Thana::where('district_id', $project->district_id)->get();
+        $data['surveys'] = Survey::orderBy('order_id', 'asc')->where('status', true)->get();
+        $data['land_classes'] = LandClass::orderBy('name', 'asc')->where('parent_id', 1)->get();
+        $data['land_owners'] = ProjectLandOwner::with('owner')->where('project_id',  $id)->get();
+        return view('backend.pages.project.ownership.index', $data);
     }
 
  

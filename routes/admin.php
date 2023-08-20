@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\LandOwnerController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuLabelController;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
 use App\Http\Controllers\MinistryController;
+use App\Http\Controllers\MouzaController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OrganizationDesignationController;
 use App\Http\Controllers\OrganizationOfficeController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectOrganizationOfficerController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SectionOfficerController;
+use App\Models\Land\LandOwner;
 use App\Models\SectionOfficer;
 use Illuminate\Support\Facades\Route;
 
@@ -46,17 +49,22 @@ Route::resources([
     'organization-officer' => OrganizationOfficerController::class,
     'project-organization-officer' => ProjectOrganizationOfficerController::class,
     'project-attachment' => ProjectAttachmentController::class,
+    'land-owner' => LandOwnerController::class, 
     'project' => ProjectController::class, 
     'ministry' => MinistryController::class,
     'menu-label' => MenuLabelController::class,
     'menu' => MenuController::class,
 ]);
 
+Route::get('get-mouzas-by-thana-and-survey', [MouzaController::class, 'getMouzasByThanaAndSurvey'])->name('mouza.getMouzasByThanaAndSurvey');
+
 Route::get('project-current', [ProjectController::class, 'current'])->name('project.current');
 Route::get('project-finished', [ProjectController::class, 'finished'])->name('project.finished');
 Route::get('project-pending', [ProjectController::class, 'pending'])->name('project.pending');
+
 Route::get('project-officers/{id}',[ProjectController::class, 'officers'])->name('project.officers');
 Route::get('project-attachments/{id}',[ProjectController::class, 'attachments'])->name('project.attachments');
+Route::get('project-ownership/{id}',[ProjectController::class, 'ownership'])->name('project.ownership');
 
 Route::post('project-attachment-upload',[ProjectAttachmentController::class, 'upload'])->name('project.attachment.upload');
 Route::post('project-attachment-remove',[ProjectAttachmentController::class, 'remove'])->name('project.attachment.remove');

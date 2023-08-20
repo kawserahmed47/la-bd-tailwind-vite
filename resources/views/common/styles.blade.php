@@ -9,4 +9,4 @@
   <link rel="stylesheet" href="{{asset('css/custom.css')}}">
   <link rel="stylesheet" href="{{asset('build/assets/app-eba0234a.css')}}">
   <script src="{{asset('build/assets/app-8b0b5c4d.js')}}"></script>
-  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+  @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('mouzas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('thana_id')->constrained('thanas')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('bn_name')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
-            $table->bigInteger('jl_no')->default(1);
-            $table->foreignId('thana_id')->constrained('thanas')->onDelete('cascade');
-            $table->foreignId('survey_id')->constrained('surveys')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

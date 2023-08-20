@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('land_khatian_owners', function (Blueprint $table) {
+        Schema::create('khatian_dag_shuchis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('land_khatian_id')->constrained('land_khatians')->onDelete('cascade');
-            $table->foreignId('land_class_id')->constrained('land_classes')->onDelete('cascade');
-            $table->foreignId('land_owner_id')->constrained('land_owners')->onDelete('cascade');
-            $table->string('land_quantity')->nullable();
+            $table->foreignId('land_dag_shuchi_id')->constrained('land_dag_shuchis')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('land_khatian_owners');
+        Schema::dropIfExists('khatian_dag_shuchis');
     }
 };

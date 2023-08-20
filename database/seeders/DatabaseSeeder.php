@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             SurveySeeder::class,
             SurveyDistrictSeeder::class,
             MouzaSeeder::class,
+            MouzaSurveySeeder::class,
+
 
             LandClassSeeder::class,
             AreaSeeder::class,

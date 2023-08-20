@@ -2,22 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BasicSettings\Mouza;
+use App\Models\Land\ProjectLandOwner;
 use Illuminate\Http\Request;
 
-class MouzaController extends Controller
+class ProjectLandOwnerController extends Controller
 {
-
-    public function getMouzasByThanaAndSurvey(Request $request)
-    {
-        $data['mouzas'] = Mouza::rightJoin('mouza_surveys', 'mouza_surveys.mouza_id','=','mouzas.id')
-        ->select('mouzas.*', 'mouza_surveys.jl_number', 'mouza_surveys.survey_id')
-        ->where('mouza_surveys.survey_id', $request->survey_id)
-        ->where('mouzas.thana_id', $request->thana_id)
-        ->get();
-        return response()->json($data);
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +34,7 @@ class MouzaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mouza $mouza)
+    public function show(ProjectLandOwner $projectLandOwner)
     {
         //
     }
@@ -53,7 +42,7 @@ class MouzaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mouza $mouza)
+    public function edit(ProjectLandOwner $projectLandOwner)
     {
         //
     }
@@ -61,7 +50,7 @@ class MouzaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mouza $mouza)
+    public function update(Request $request, ProjectLandOwner $projectLandOwner)
     {
         //
     }
@@ -69,7 +58,7 @@ class MouzaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mouza $mouza)
+    public function destroy(ProjectLandOwner $projectLandOwner)
     {
         //
     }
