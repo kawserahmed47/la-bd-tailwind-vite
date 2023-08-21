@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('land_dag_shuchis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mouza_id')->constrained('mouzas')->onDelete('cascade');
+            $table->foreignId('mouza_survey_id')->constrained('mouza_surveys')->onDelete('cascade');
             $table->string('dag_number');
             $table->string('total_land_quantity')->nullable();
             $table->timestamps();

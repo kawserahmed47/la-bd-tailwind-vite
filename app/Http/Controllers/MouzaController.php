@@ -11,7 +11,7 @@ class MouzaController extends Controller
     public function getMouzasByThanaAndSurvey(Request $request)
     {
         $data['mouzas'] = Mouza::rightJoin('mouza_surveys', 'mouza_surveys.mouza_id','=','mouzas.id')
-        ->select('mouzas.*', 'mouza_surveys.jl_number', 'mouza_surveys.survey_id')
+        ->select('mouzas.thana_id',  'mouzas.name', 'mouzas.bn_name', 'mouza_surveys.id', 'mouza_surveys.jl_number', 'mouza_surveys.survey_id')
         ->where('mouza_surveys.survey_id', $request->survey_id)
         ->where('mouzas.thana_id', $request->thana_id)
         ->get();

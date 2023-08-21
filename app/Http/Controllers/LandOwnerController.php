@@ -80,11 +80,11 @@ class LandOwnerController extends Controller
         DB::beginTransaction();
 
         try {
-            $dag = LandDagShuchi::firstOrNew(['mouza_id' => $request->mouza]);
+            $dag = LandDagShuchi::firstOrNew(['mouza_survey_id' => $request->mouza]);
             $dag->dag_number = $request->dag_number;
             $dag->save();
 
-            $khatian = LandKhatian::firstOrNew(['mouza_id' => $request->mouza]);
+            $khatian = LandKhatian::firstOrNew(['mouza_survey_id' => $request->mouza]);
             $khatian->khatian_number = $request->khatian_number;
             $khatian->save();
 
@@ -146,16 +146,64 @@ class LandOwnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LandOwner $landOwner)
+    public function update(Request $request,  $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'father_name' => 'required',
+            'mother_name' => 'nullable',
+            'address' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $data['status'] = false;
+            $data['message'] = "Please check your entries!";
+            $data['errors'] = $validator->errors();
+            return response()->json($data, 400);
+        }
+
+        $landOwner = LandOwner::find($id);
+        if($landOwner){
+
+            try {
+                $landOwner->name = $request->name;
+                $landOwner->father_name = $request->father_name;
+                $landOwner->mother_name = $request->mother_name; 
+                $landOwner->address = $request->address; 
+                $landOwner->save();
+                $data['status'] = true;
+                $data['message'] = "Updated the record successfully!";
+                return response()->json($data, 200);
+            } catch (\Throwable $th) {
+                $data['status'] = false;
+                $data['message'] = "Failed to update the record!";
+                return response()->json($data, 500);
+            }
+
+            
+        } else{
+            $data['status'] = false;
+            $data['message'] = "Nothing found to update!";
+            return response()->json($data, 404);
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LandOwner $landOwner)
+    public function destroy( $id)
     {
-        //
+        try {
+            LandOwner::destroy($id);
+            $data['status'] = true;
+            $data['message'] = "Record deleted successfully!";
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            $data['status'] = false;
+            $data['message'] = "Failed to deleted the record!";
+            $data['errors'] = $th;
+            return response()->json($data, 200);
+        }
     }
 }

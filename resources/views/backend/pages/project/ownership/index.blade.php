@@ -61,7 +61,7 @@
                                             Add New
                                         </button>
                                     </div>
-                                    <div class="relative max-w-full overflow-x-auto pb-5 project-attachment-table-section">
+                                    <div class="relative max-w-full overflow-x-auto pb-5 project-ownership-table-section">
                                         <table class="w-full table-auto">
                                             <thead>
                                                 <tr class="bg-gray-2 text-left dark:bg-meta-4">
@@ -109,14 +109,17 @@
                                                                 <div class="flex items-center space-x-3.5">
                                                                     <button type="button"
 
-                                                                        data-id="{{$land_owner->id}}"
-                                                                        data-name="{{$land_owner->name}}"
-                                                                        data-description="{{$land_owner->description}}"
-                                                                        data-path="{{$land_owner->file_path}}"
+                                                                        data-id="{{$land_owner->owner->id}}"
+                                                                        data-name="{{$land_owner->owner->name}}"
+                                                                        data-father="{{$land_owner->owner->father_name}}"
+                                                                        data-mother="{{$land_owner->owner->mother_name}}"
+                                                                        data-address="{{$land_owner->owner->address}}"
+                                                                        data-action="{{route('admin.land-owner.update', $land_owner->owner->id)}}"
 
                                                                         data-tooltip-target="tooltip-edit"
+                                                                        data-modal-target="project-ownership-edit-modal"
                                                                         data-tooltip-placement="top"
-                                                                        class="hover:text-primary project-attachment-edit-btn">
+                                                                        class="hover:text-primary project-ownership-edit-btn">
                                                                         <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white"
                                                                             aria-hidden="true"
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -128,9 +131,10 @@
                                                                         </svg>
                                                                     </button>
 
-                                                                    <a data-tooltip-target="tooltip-show" target="_blank"
+                                                                    <a data-tooltip-target="tooltip-show"
                                                                         data-tooltip-placement="top"
-                                                                        href="{{ asset($land_owner->file_path) }}"
+                                                                        href="#"
+                                                                        onclick="alert('Under constructions! You will able to see here all details of land information of this owner...')"
                                                                         class="hover:text-primary">
                                                                         <svg class="fill-current text-gray-500 dark:text-white"
                                                                             width="18" height="18"
@@ -145,9 +149,9 @@
                                                                         </svg>
                                                                     </a>
 
-                                                                    <form class="project-attachment-delete-form"
+                                                                    <form class="project-ownership-delete-form"
                                                                         method="POST"
-                                                                        action="#">
+                                                                        action="{{route('admin.land-owner.destroy', $land_owner->owner->id)}}">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button type="submit"
@@ -202,7 +206,8 @@
     @include('common.tooltip', ['tooltipName' => 'tooltip-delete', 'tooltipTitle' => 'Delete'])
 
 
-    @include('backend.pages.project.ownership.modals.ownership_modal')
+    @include('backend.pages.project.ownership.modals.ownership_create_modal')
+    @include('backend.pages.project.ownership.modals.ownership_edit_modal')
 
 
 
@@ -214,6 +219,9 @@
         const _this_modal_element = document.getElementById('project-ownership-modal');
         const modal = new Modal(_this_modal_element);
 
+        const _this_edit_modal_element = document.getElementById('project-ownership-edit-modal');
+        const edit_modal = new Modal(_this_edit_modal_element);
+
         $(document).on('click', '#add-new-ownership-btn', function(e) {
             e.preventDefault();
             let _this_form = $('#project-attachment-form');
@@ -222,23 +230,30 @@
             modal.show();
         })
 
-        $(document).on('click', '.project-attachment-edit-btn', function(e){
+        $(document).on('click', '.project-ownership-edit-btn', function(e){
             e.preventDefault();
             let _this = $(this);
-            let _this_form = $('#project-attachment-form');
-            _this_form.trigger("reset");
-            modal.show();
+            let _this_form = $('#project-ownership-edit-form');
+            _this_form.attr('action', _this.attr('data-action'));
+            _this_form.find('#edit_id').val(_this.attr('data-id'));
+            _this_form.find('#edit_name').val(_this.attr('data-name'));
+            _this_form.find('#edit_father_name').val(_this.attr('data-father'));
+            _this_form.find('#edit_mother_name').val(_this.attr('data-mother'));
+            _this_form.find('#edit_address').val(_this.attr('data-address'));
+
+            edit_modal.show();
         })
 
         $(document).on('click', '.close-modal', function(e) {
             e.preventDefault();
-            let _this_form = $('#project-attachment-form');
+            let _this_form = $('form');
             _this_form.find('.id').val('');
             _this_form.trigger("reset");
             modal.hide();
+            edit_modal.hide()
         })
 
-        $(document).on('submit', '#project-ownership-form', function(e) {
+        $(document).on('submit', '#project-ownership-form, #project-ownership-edit-form', function(e) {
             e.preventDefault();
             let _this = $(this);
             $.ajax({
@@ -268,10 +283,10 @@
 
         })
 
-        $(document).on('submit', '.project-attachment-delete-form', function(e) {
+        $(document).on('submit', '.project-ownership-delete-form', function(e) {
             e.preventDefault()
             let _this = $(this);
-            let formLoaded = _this.closest('.project-attachment-table-section').find('.form-loaded');
+            let formLoaded = _this.closest('.project-ownership-table-section').find('.form-loaded');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
